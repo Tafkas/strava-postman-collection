@@ -1,17 +1,16 @@
 {
 	"info": {
+		"_postman_id": "e3be7c5b-55f1-48ae-a74e-078b829d9831",
 		"name": "Strava API v3",
-		"_postman_id": "4988657a-b7be-ea43-48a6-9b0348a06c34",
 		"description": "Strava API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "activities",
-			"description": "Folder for activities",
+			"name": "athletes",
 			"item": [
 				{
-					"name": "Get Activity",
+					"name": "Get Athlete Stats",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -22,7 +21,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id?include_all_efforts={{include_all_efforts}}",
+							"raw": "https://www.strava.com/api/v3/athletes/:id/stats?page={{page}}&per_page=30",
 							"protocol": "https",
 							"host": [
 								"www",
@@ -32,170 +31,9 @@
 							"path": [
 								"api",
 								"v3",
-								"activities",
-								":id"
-							],
-							"query": [
-								{
-									"key": "include_all_efforts",
-									"value": "{{include_all_efforts}}"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns an activity for a given identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Updates an activity for a given identifier"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Activity",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Deletes an activity for a given identifier"
-					},
-					"response": []
-				},
-				{
-					"name": "List Friends' Activities",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/following?before={{before}}&page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								"following"
-							],
-							"query": [
-								{
-									"key": "before",
-									"value": "{{before}}"
-								},
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							]
-						},
-						"description": "Returns the activities of the friends of the logged-in athlete."
-					},
-					"response": []
-				},
-				{
-					"name": "List Related Activities",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/related?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
+								"athletes",
 								":id",
-								"related"
+								"stats"
 							],
 							"query": [
 								{
@@ -209,17 +47,17 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns a list of activities related to another using specific identifier."
+						"description": "Returns the activity stats of an athlete."
 					},
 					"response": []
 				},
 				{
-					"name": "List Activity Laps",
+					"name": "List Athlete Routes",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -230,7 +68,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/laps",
+							"raw": "https://www.strava.com/api/v3/athletes/:id/routes?page={{page}}&per_page=30",
 							"protocol": "https",
 							"host": [
 								"www",
@@ -240,83 +78,9 @@
 							"path": [
 								"api",
 								"v3",
-								"activities",
+								"athletes",
 								":id",
-								"laps"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the laps of an activity identified by an identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Activity Zones",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/zones",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"zones"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the zones of an activity identified by an identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "List Activity Comments",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/comments?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"comments"
+								"routes"
 							],
 							"query": [
 								{
@@ -330,117 +94,23 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns the comments of an activity identified by an identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "List Activity Kudoers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/kudos?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"kudos"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the athletes who kudoed an activity identified by an identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Activity Streams",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/streams?keys={{keys}}&key_by_type=true",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"streams"
-							],
-							"query": [
-								{
-									"key": "keys",
-									"value": "{{keys}}"
-								},
-								{
-									"key": "key_by_type",
-									"value": "true"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the set of streams for an activity"
+						"description": "Returns a list of the routes created by the authenticated athlete using their athlete ID."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Folder for athletes"
 		},
 		{
 			"name": "athlete",
-			"description": "Folder for athlete",
 			"item": [
 				{
-					"name": "Get Logged-in Athlete",
+					"name": "Get Authenticated Athlete",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -464,7 +134,7 @@
 								"athlete"
 							]
 						},
-						"description": "Returns the currently logged-in athlete"
+						"description": "Returns the currently authenticated athlete."
 					},
 					"response": []
 				},
@@ -478,10 +148,7 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "The athlete entity to update"
-						},
+						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete",
 							"protocol": "https",
@@ -494,89 +161,15 @@
 								"api",
 								"v3",
 								"athlete"
-							]
-						},
-						"description": "Update the currently logged-in athlete"
-					},
-					"response": []
-				},
-				{
-					"name": "List Friends",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete/friends?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
 							],
-							"path": [
-								"api",
-								"v3",
-								"athlete",
-								"friends"
-							],
-							"query": [
+							"variable": [
 								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
+									"key": "weight",
+									"value": "{{weight}}"
 								}
 							]
 						},
-						"description": "Returns a list of logged-in athlete's friends, i.e. athletes followed by the logged-in athlete."
-					},
-					"response": []
-				},
-				{
-					"name": "List Followers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete/followers?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athlete",
-								"followers"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							]
-						},
-						"description": "Returns a list of the logged-in athlete's followers."
+						"description": "Update the currently authenticated athlete."
 					},
 					"response": []
 				},
@@ -606,7 +199,7 @@
 								"zones"
 							]
 						},
-						"description": "Returns the the logged-in athlete's heart rate and power zones."
+						"description": "Returns the the authenticated athlete's heart rate and power zones."
 					},
 					"response": []
 				},
@@ -694,846 +287,15 @@
 								}
 							]
 						},
-						"description": "Returns a list of the clubs whose membership includes the logged-in athlete."
+						"description": "Returns a list of the clubs whose membership includes the authenticated athlete."
 					},
 					"response": []
 				}
-			]
-		},
-		{
-			"name": "athletes",
-			"description": "Folder for athletes",
-			"item": [
-				{
-					"name": "Get Athlete",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns an athlete for a given identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "List Athlete Friends",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/friends?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id",
-								"friends"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a given athlete's friends."
-					},
-					"response": []
-				},
-				{
-					"name": "List Athlete Followers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/followers?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id",
-								"followers"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the list of a given athlete's followers."
-					},
-					"response": []
-				},
-				{
-					"name": "List Common Friends",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/both-following?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id",
-								"both-following"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the common friends between a given athlete and the logged-in athlete."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Athlete Stats",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/stats?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id",
-								"stats"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the activity stats of an athlete."
-					},
-					"response": []
-				},
-				{
-					"name": "List Athlete Routes",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/routes?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"athletes",
-								":id",
-								"routes"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the routes created by an athlete using their identifier."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "clubs",
-			"description": "Folder for clubs",
-			"item": [
-				{
-					"name": "Get Club",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a given club using its identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "List Club Members",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/members?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"members"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the athletes who are members of a given club."
-					},
-					"response": []
-				},
-				{
-					"name": "List Club Administrators",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/admins?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"admins"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the administrators of a given club."
-					},
-					"response": []
-				},
-				{
-					"name": "List Club Announcements",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/announcements?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"announcements"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the announcements of a given club."
-					},
-					"response": []
-				},
-				{
-					"name": "List Club Activities",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/activities?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"activities"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a list of the activities of a given club."
-					},
-					"response": []
-				},
-				{
-					"name": "Join Club",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/join",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"join"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Adds the logged-in athlete to the club's membership."
-					},
-					"response": []
-				},
-				{
-					"name": "Leave Club",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/leave",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"clubs",
-								":id",
-								"leave"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Removes the logged-in athlete from the club's membership."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "gear",
-			"description": "Folder for gear",
-			"item": [
-				{
-					"name": "Get Equipment",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/gear/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"gear",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns an equipment using its identifier."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "routes",
-			"description": "Folder for routes",
-			"item": [
-				{
-					"name": "Get Route",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/routes/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"routes",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a route using its identifier."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "running_races",
-			"description": "Folder for running_races",
-			"item": [
-				{
-					"name": "Get Running Race",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/running_races/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"running_races",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a running race for a given identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "List Running Races",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/running_races?year={{year}}",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"running_races"
-							],
-							"query": [
-								{
-									"key": "year",
-									"value": "{{year}}"
-								}
-							]
-						},
-						"description": "Returns a list running races based on a set of search criterias."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "segment_efforts",
-			"description": "Folder for segment_efforts",
-			"item": [
-				{
-					"name": "Get Segment Effort",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segment_efforts/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segment_efforts",
-								":id"
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns a segment effort for a given identifier."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Segment Effort Streams",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segment_efforts/:id/streams?keys={{keys}}&key_by_type=true",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segment_efforts",
-								":id",
-								"streams"
-							],
-							"query": [
-								{
-									"key": "keys",
-									"value": "{{keys}}"
-								},
-								{
-									"key": "key_by_type",
-									"value": "true"
-								}
-							],
-							"variable": [
-								{
-									"value": "{{id}}",
-									"id": "id"
-								}
-							]
-						},
-						"description": "Returns the set of streams for a segment effort"
-					},
-					"response": []
-				}
-			]
+			],
+			"description": "Folder for athlete"
 		},
 		{
 			"name": "segments",
-			"description": "Folder for segments",
 			"item": [
 				{
 					"name": "Get Segment",
@@ -1562,12 +324,12 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns the segment identified by the given identifier."
+						"description": "Returns the specified segment."
 					},
 					"response": []
 				},
@@ -1607,7 +369,7 @@
 								}
 							]
 						},
-						"description": "Returns a list of the segments starred by logged-in athlete."
+						"description": "List of the authenticated athlete's starred segments."
 					},
 					"response": []
 				},
@@ -1621,7 +383,16 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "starred",
+									"value": false,
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/:id/starred",
 							"protocol": "https",
@@ -1639,12 +410,12 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Stars a segment referenced by its identifier."
+						"description": "Stars/Unstars the given segment for the authenticated athlete."
 					},
 					"response": []
 				},
@@ -1714,12 +485,12 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns the leaderboard of a segment."
+						"description": "Returns the specified segment leaderboard."
 					},
 					"response": []
 				},
@@ -1761,12 +532,12 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns a list of the efforts for a segment referenced by its id."
+						"description": "Returns a set of the authenticated athlete's segment efforts for a given segment."
 					},
 					"response": []
 				},
@@ -1814,7 +585,7 @@
 								}
 							]
 						},
-						"description": "Returns the segments matching a specified query"
+						"description": "Returns the top 10 segments matching a specified query."
 					},
 					"response": []
 				},
@@ -1856,20 +627,912 @@
 							],
 							"variable": [
 								{
-									"value": "{{id}}",
-									"id": "id"
+									"key": "id",
+									"value": "{{id}}"
 								}
 							]
 						},
-						"description": "Returns the set of streams for a segment"
+						"description": "Returns the given segment's streams."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Folder for segments"
+		},
+		{
+			"name": "segment_efforts",
+			"item": [
+				{
+					"name": "Get Segment Effort",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/segment_efforts/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"segment_efforts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a segment effort from an activity that is owned by the authenticated athlete."
+					},
+					"response": []
+				},
+				{
+					"name": "Get segment effort streams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/segment_efforts/:id/streams?keys={{keys}}&key_by_type=true",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"segment_efforts",
+								":id",
+								"streams"
+							],
+							"query": [
+								{
+									"key": "keys",
+									"value": "{{keys}}"
+								},
+								{
+									"key": "key_by_type",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a set of streams for a segment effort completed by the authenticated athlete."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for segment_efforts"
+		},
+		{
+			"name": "running_races",
+			"item": [
+				{
+					"name": "Get Running Race",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/running_races/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"running_races",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a running race for a given identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "List Running Races",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/running_races?year={{year}}",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"running_races"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								}
+							]
+						},
+						"description": "Returns a list running races based on a set of search criteria."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for running_races"
+		},
+		{
+			"name": "activities",
+			"item": [
+				{
+					"name": "Create an Activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{name}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "{{type}}",
+									"type": "text"
+								},
+								{
+									"key": "start_date_local",
+									"value": "{{start_date_local}}",
+									"type": "text"
+								},
+								{
+									"key": "elapsed_time",
+									"value": "{{elapsed_time}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{{description}}",
+									"type": "text"
+								},
+								{
+									"key": "distance",
+									"value": "{{distance}}",
+									"type": "text"
+								},
+								{
+									"key": "private",
+									"value": "{{private}}",
+									"type": "text"
+								},
+								{
+									"key": "trainer",
+									"value": "{{trainer}}",
+									"type": "text"
+								},
+								{
+									"key": "photo_ids",
+									"value": "{{photo_ids}}",
+									"type": "text"
+								},
+								{
+									"key": "commute",
+									"value": "{{commute}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities"
+							]
+						},
+						"description": "Creates a manual activity for an athlete. Requires write permissions, as requested during the authorization process."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id?include_all_efforts={{include_all_efforts}}",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id"
+							],
+							"query": [
+								{
+									"key": "include_all_efforts",
+									"value": "{{include_all_efforts}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the given activity that is owned by the authenticated athlete."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Updates the given activity that is owned by the authenticated athlete."
+					},
+					"response": []
+				},
+				{
+					"name": "List Activity Laps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id/laps",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id",
+								"laps"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the laps of an activity identified by an identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity Zones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id/zones",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id",
+								"zones"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Premium Feature. Returns the zones of a given activity."
+					},
+					"response": []
+				},
+				{
+					"name": "List Activity Comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id/comments?page={{page}}&per_page=30",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "30"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the comments on the given activity."
+					},
+					"response": []
+				},
+				{
+					"name": "List Activity Kudoers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id/kudos?page={{page}}&per_page=30",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id",
+								"kudos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "30"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the athletes who kudoed an activity identified by an identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity Streams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/activities/:id/streams?keys={{keys}}&key_by_type=true",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"activities",
+								":id",
+								"streams"
+							],
+							"query": [
+								{
+									"key": "keys",
+									"value": "{{keys}}"
+								},
+								{
+									"key": "key_by_type",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the given activity's streams."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for activities"
+		},
+		{
+			"name": "clubs",
+			"item": [
+				{
+					"name": "Get Club",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/clubs/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"clubs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a given club using its identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "List Club Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/clubs/:id/members?page={{page}}&per_page=30",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"clubs",
+								":id",
+								"members"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "30"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a list of the athletes who are members of a given club."
+					},
+					"response": []
+				},
+				{
+					"name": "List Club Administrators.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/clubs/:id/admins?page={{page}}&per_page=30",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"clubs",
+								":id",
+								"admins"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "30"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a list of the administrators of a given club."
+					},
+					"response": []
+				},
+				{
+					"name": "List Club Activities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/clubs/:id/activities?page={{page}}&per_page=30",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"clubs",
+								":id",
+								"activities"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "30"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Retrieve recent activities from members of a specific club. The authenticated athlete must belong to the requested club in order to hit this endpoint. Pagination is supported. Enhanced Privacy Mode is respected for all activities."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for clubs"
+		},
+		{
+			"name": "gear",
+			"item": [
+				{
+					"name": "Get Equipment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/gear/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"gear",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns an equipment using its identifier."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for gear"
+		},
+		{
+			"name": "routes",
+			"item": [
+				{
+					"name": "Get Route",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/routes/:id",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"routes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a route using its identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "Export Route GPX",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/routes/:id/export_gpx",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"routes",
+								":id",
+								"export_gpx"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a GPX file of the route."
+					},
+					"response": []
+				},
+				{
+					"name": "Export Route TCX",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.strava.com/api/v3/routes/:id/export_tcx",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"routes",
+								":id",
+								"export_tcx"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns a TCX file of the route."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for routes"
 		},
 		{
 			"name": "uploads",
-			"description": "Folder for uploads",
 			"item": [
 				{
 					"name": "Upload Activity",
@@ -1975,8 +1638,8 @@
 							],
 							"variable": [
 								{
-									"value": "{{uploadId}}",
-									"id": "uploadId"
+									"key": "uploadId",
+									"value": "{{uploadId}}"
 								}
 							]
 						},
@@ -1984,7 +1647,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Folder for uploads"
 		}
 	]
 }
