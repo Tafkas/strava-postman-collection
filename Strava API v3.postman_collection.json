@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e3be7c5b-55f1-48ae-a74e-078b829d9831",
+		"_postman_id": "cadd1eb7-042f-4a11-b8e9-b5265715e994",
 		"name": "Strava API v3",
 		"description": "Strava API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -19,7 +19,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athletes/:id/stats?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -66,7 +65,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athletes/:id/routes?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -99,7 +97,7 @@
 								}
 							]
 						},
-						"description": "Returns a list of the routes created by the authenticated athlete using their athlete ID."
+						"description": "Returns a list of the routes created by the authenticated athlete using their athlete ID. Private routes are filtered out unless requested by a token with read_all scope."
 					},
 					"response": []
 				}
@@ -119,7 +117,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete",
 							"protocol": "https",
@@ -134,7 +131,7 @@
 								"athlete"
 							]
 						},
-						"description": "Returns the currently authenticated athlete."
+						"description": "Returns the currently authenticated athlete. Tokens with profile:read_all scope will receive a detailed athlete representation; all others will receive a summary representation."
 					},
 					"response": []
 				},
@@ -148,7 +145,10 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete",
 							"protocol": "https",
@@ -169,7 +169,7 @@
 								}
 							]
 						},
-						"description": "Update the currently authenticated athlete."
+						"description": "Update the currently authenticated athlete. Requires profile:write scope."
 					},
 					"response": []
 				},
@@ -183,7 +183,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete/zones",
 							"protocol": "https",
@@ -199,7 +198,7 @@
 								"zones"
 							]
 						},
-						"description": "Returns the the authenticated athlete's heart rate and power zones."
+						"description": "Returns the the authenticated athlete's heart rate and power zones. Requires profile:read_all."
 					},
 					"response": []
 				},
@@ -213,7 +212,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete/activities?before={{before}}&after={{after}}&page={{page}}&per_page=30",
 							"protocol": "https",
@@ -247,7 +245,7 @@
 								}
 							]
 						},
-						"description": "Returns the activities of an athlete for a specific identifier."
+						"description": "Returns the activities of an athlete for a specific identifier. Requires activity:read. Only Me activities will be filtered out unless requested by a token with activity:read_all."
 					},
 					"response": []
 				},
@@ -261,7 +259,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/athlete/clubs?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -307,7 +304,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/:id",
 							"protocol": "https",
@@ -329,7 +325,7 @@
 								}
 							]
 						},
-						"description": "Returns the specified segment."
+						"description": "Returns the specified segment. read_all scope required in order to retrieve athlete-specific segment information, or to retrieve private segments."
 					},
 					"response": []
 				},
@@ -343,7 +339,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/starred?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -369,7 +364,7 @@
 								}
 							]
 						},
-						"description": "List of the authenticated athlete's starred segments."
+						"description": "List of the authenticated athlete's starred segments. Private segments are filtered out unless requested by a token with read_all scope."
 					},
 					"response": []
 				},
@@ -415,7 +410,7 @@
 								}
 							]
 						},
-						"description": "Stars/Unstars the given segment for the authenticated athlete."
+						"description": "Stars/Unstars the given segment for the authenticated athlete. Requires profile:write scope."
 					},
 					"response": []
 				},
@@ -429,7 +424,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/:id/leaderboard?gender={{gender}}&age_group={{age_group}}&weight_class={{weight_class}}&following={{following}}&club_id={{club_id}}&date_range={{date_range}}&context_entries={{context_entries}}&page={{page}}&per_page=30",
 							"protocol": "https",
@@ -504,7 +498,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/:id/all_efforts?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -551,7 +544,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/explore?bounds={{bounds}}&activity_type={{activity_type}}&min_cat={{min_cat}}&max_cat={{max_cat}}",
 							"protocol": "https",
@@ -599,7 +591,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segments/:id/streams?keys={{keys}}&key_by_type=true",
 							"protocol": "https",
@@ -632,7 +623,7 @@
 								}
 							]
 						},
-						"description": "Returns the given segment's streams."
+						"description": "Returns the given segment's streams. Requires read_all scope for private segments."
 					},
 					"response": []
 				}
@@ -652,7 +643,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segment_efforts/:id",
 							"protocol": "https",
@@ -679,7 +669,7 @@
 					"response": []
 				},
 				{
-					"name": "Get segment effort streams",
+					"name": "Get Segment Effort Streams",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -688,7 +678,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/segment_efforts/:id/streams?keys={{keys}}&key_by_type=true",
 							"protocol": "https",
@@ -721,7 +710,7 @@
 								}
 							]
 						},
-						"description": "Returns a set of streams for a segment effort completed by the authenticated athlete."
+						"description": "Returns a set of streams for a segment effort completed by the authenticated athlete. Requires read_all scope."
 					},
 					"response": []
 				}
@@ -741,7 +730,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/running_races/:id",
 							"protocol": "https",
@@ -777,7 +765,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/running_races?year={{year}}",
 							"protocol": "https",
@@ -852,11 +839,6 @@
 									"type": "text"
 								},
 								{
-									"key": "private",
-									"value": "{{private}}",
-									"type": "text"
-								},
-								{
 									"key": "trainer",
 									"value": "{{trainer}}",
 									"type": "text"
@@ -887,7 +869,7 @@
 								"activities"
 							]
 						},
-						"description": "Creates a manual activity for an athlete. Requires write permissions, as requested during the authorization process."
+						"description": "Creates a manual activity for an athlete, requires activity:write scope."
 					},
 					"response": []
 				},
@@ -901,7 +883,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id?include_all_efforts={{include_all_efforts}}",
 							"protocol": "https",
@@ -929,7 +910,7 @@
 								}
 							]
 						},
-						"description": "Returns the given activity that is owned by the authenticated athlete."
+						"description": "Returns the given activity that is owned by the authenticated athlete. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
 					},
 					"response": []
 				},
@@ -968,7 +949,7 @@
 								}
 							]
 						},
-						"description": "Updates the given activity that is owned by the authenticated athlete."
+						"description": "Updates the given activity that is owned by the authenticated athlete. Requires activity:write. Also requires activity:read_all in order to update Only Me activities"
 					},
 					"response": []
 				},
@@ -982,7 +963,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id/laps",
 							"protocol": "https",
@@ -1005,7 +985,7 @@
 								}
 							]
 						},
-						"description": "Returns the laps of an activity identified by an identifier."
+						"description": "Returns the laps of an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
 					},
 					"response": []
 				},
@@ -1019,7 +999,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id/zones",
 							"protocol": "https",
@@ -1042,7 +1021,7 @@
 								}
 							]
 						},
-						"description": "Premium Feature. Returns the zones of a given activity."
+						"description": "Summit Feature. Returns the zones of a given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
 					},
 					"response": []
 				},
@@ -1056,7 +1035,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id/comments?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -1089,7 +1067,7 @@
 								}
 							]
 						},
-						"description": "Returns the comments on the given activity."
+						"description": "Returns the comments on the given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
 					},
 					"response": []
 				},
@@ -1103,7 +1081,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id/kudos?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -1136,7 +1113,7 @@
 								}
 							]
 						},
-						"description": "Returns the athletes who kudoed an activity identified by an identifier."
+						"description": "Returns the athletes who kudoed an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
 					},
 					"response": []
 				},
@@ -1150,7 +1127,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/activities/:id/streams?keys={{keys}}&key_by_type=true",
 							"protocol": "https",
@@ -1183,7 +1159,7 @@
 								}
 							]
 						},
-						"description": "Returns the given activity's streams."
+						"description": "Returns the given activity's streams. Requires activity:read scope. Requires activity:read_all scope for Only Me activities."
 					},
 					"response": []
 				}
@@ -1203,7 +1179,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/clubs/:id",
 							"protocol": "https",
@@ -1239,7 +1214,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/clubs/:id/members?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -1286,7 +1260,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/clubs/:id/admins?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -1333,7 +1306,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/clubs/:id/activities?page={{page}}&per_page=30",
 							"protocol": "https",
@@ -1366,7 +1338,7 @@
 								}
 							]
 						},
-						"description": "Retrieve recent activities from members of a specific club. The authenticated athlete must belong to the requested club in order to hit this endpoint. Pagination is supported. Enhanced Privacy Mode is respected for all activities."
+						"description": "Retrieve recent activities from members of a specific club. The authenticated athlete must belong to the requested club in order to hit this endpoint. Pagination is supported. Athlete profile visibility is respected for all activities."
 					},
 					"response": []
 				}
@@ -1386,7 +1358,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/gear/:id",
 							"protocol": "https",
@@ -1428,7 +1399,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/routes/:id",
 							"protocol": "https",
@@ -1450,7 +1420,7 @@
 								}
 							]
 						},
-						"description": "Returns a route using its identifier."
+						"description": "Returns a route using its identifier. Requires read_all scope for private routes."
 					},
 					"response": []
 				},
@@ -1464,7 +1434,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/routes/:id/export_gpx",
 							"protocol": "https",
@@ -1487,7 +1456,7 @@
 								}
 							]
 						},
-						"description": "Returns a GPX file of the route."
+						"description": "Returns a GPX file of the route. Requires read_all scope for private routes."
 					},
 					"response": []
 				},
@@ -1501,7 +1470,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/routes/:id/export_tcx",
 							"protocol": "https",
@@ -1524,7 +1492,43 @@
 								}
 							]
 						},
-						"description": "Returns a TCX file of the route."
+						"description": "Returns a TCX file of the route. Requires read_all scope for private routes."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Route Streams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://www.strava.com/api/v3/routes/:id/streams",
+							"protocol": "https",
+							"host": [
+								"www",
+								"strava",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"routes",
+								":id",
+								"streams"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						},
+						"description": "Returns the given route's streams. Requires read_all scope for private routes."
 					},
 					"response": []
 				}
@@ -1567,11 +1571,6 @@
 									"type": "text"
 								},
 								{
-									"key": "private",
-									"value": "{{private}}",
-									"type": "text"
-								},
-								{
 									"key": "trainer",
 									"value": "{{trainer}}",
 									"type": "text"
@@ -1607,7 +1606,7 @@
 								"uploads"
 							]
 						},
-						"description": "Uploads a new data file to create an activity from."
+						"description": "Uploads a new data file to create an activity from. Requires activity:write scope."
 					},
 					"response": []
 				},
@@ -1621,7 +1620,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
 						"url": {
 							"raw": "https://www.strava.com/api/v3/uploads/:uploadId",
 							"protocol": "https",
@@ -1643,7 +1641,7 @@
 								}
 							]
 						},
-						"description": "Returns an upload for a given identifier."
+						"description": "Returns an upload for a given identifier. Requires activity:write scope."
 					},
 					"response": []
 				}
