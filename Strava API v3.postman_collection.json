@@ -7,75 +7,121 @@
 	},
 	"item": [
 		{
-			"name": "athletes",
+			"name": "athletes/{id}",
 			"item": [
 				{
 					"name": "Get Athlete Stats",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/stats?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athletes/:id/stats",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athletes",
 								":id",
 								"stats"
 							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the athlete. Must match the authenticated athlete."
 								}
 							]
 						},
-						"description": "Returns the activity stats of an athlete."
+						"description": "Returns the activity stats of an athlete. Only includes data from activities set to Everyone visibilty."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Activity stats of the athlete.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athletes/:id/stats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athletes",
+										":id",
+										"stats"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athletes/:id/stats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athletes",
+										":id",
+										"stats"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "List Athlete Routes",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athletes/:id/routes?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athletes/:id/routes?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athletes",
 								":id",
 								"routes"
@@ -83,26 +129,118 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the athlete."
 								}
 							]
 						},
 						"description": "Returns a list of the routes created by the authenticated athlete using their athlete ID. Private routes are filtered out unless requested by a token with read_all scope."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athletes/:id/routes?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athletes",
+										":id",
+										"routes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A representation of the route.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athletes/:id/routes?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athletes",
+										":id",
+										"routes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"value\": \"reference https://developers.strava.com/swagger/route.json#/Route not found in the OpenAPI spec\"\n },\n {\n  \"value\": \"reference https://developers.strava.com/swagger/route.json#/Route not found in the OpenAPI spec\"\n }\n]"
+						}
+					]
 				}
 			],
-			"description": "Folder for athletes"
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "athlete",
@@ -110,585 +248,1585 @@
 				{
 					"name": "Get Authenticated Athlete",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athlete",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athlete"
 							]
 						},
 						"description": "Returns the currently authenticated athlete. Tokens with profile:read_all scope will receive a detailed athlete representation; all others will receive a summary representation."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Profile information for the authenticated athlete.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1234567890987654400,\n \"username\": \"marianne_t\",\n \"resource_state\": 3,\n \"firstname\": \"Marianne\",\n \"lastname\": \"Teutenberg\",\n \"city\": \"San Francisco\",\n \"state\": \"CA\",\n \"country\": \"US\",\n \"sex\": \"F\",\n \"premium\": true,\n \"created_at\": \"2017-11-14T02:30:05Z\",\n \"updated_at\": \"2018-02-06T19:32:20Z\",\n \"badge_type_id\": 4,\n \"profile_medium\": \"https://xxxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/medium.jpg\",\n \"profile\": \"https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/large.jpg\",\n \"friend\": null,\n \"follower\": null,\n \"follower_count\": 5,\n \"friend_count\": 5,\n \"mutual_friend_count\": 0,\n \"athlete_type\": 1,\n \"date_preference\": \"%m/%d/%Y\",\n \"measurement_preference\": \"feet\",\n \"clubs\": [],\n \"ftp\": null,\n \"weight\": 0,\n \"bikes\": [\n  {\n   \"id\": \"b12345678987655\",\n   \"primary\": true,\n   \"name\": \"EMC\",\n   \"resource_state\": 2,\n   \"distance\": 0\n  }\n ],\n \"shoes\": [\n  {\n   \"id\": \"g12345678987655\",\n   \"primary\": true,\n   \"name\": \"adidas\",\n   \"resource_state\": 2,\n   \"distance\": 4904\n  }\n ]\n}"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Update Athlete",
 					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"auth": {
+							"type": "oauth2"
 						},
+						"method": "PUT",
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athlete",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athlete"
 							],
 							"variable": [
 								{
 									"key": "weight",
-									"value": "{{weight}}"
+									"value": "<float>",
+									"description": "(Required) The weight of the athlete in kilograms."
 								}
 							]
 						},
 						"description": "Update the currently authenticated athlete. Requires profile:write scope."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Profile information for the authenticated athlete.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1.2345678987655098e+22,\n \"username\": \"marianne_v\",\n \"resource_state\": 3,\n \"firstname\": \"Marianne\",\n \"lastname\": \"V.\",\n \"city\": \"San Francisco\",\n \"state\": \"CA\",\n \"country\": \"US\",\n \"sex\": \"F\",\n \"premium\": true,\n \"created_at\": \"2017-11-14T02:30:05Z\",\n \"updated_at\": \"2018-02-06T19:32:20Z\",\n \"badge_type_id\": 4,\n \"profile_medium\": \"https://xxxxxx.cloudfront.net/pictures/athletes/1234567898765509876/1234567898765509876/2/medium.jpg\",\n \"profile\": \"https://xxxxx.cloudfront.net/pictures/athletes/1234567898765509876/1234567898765509876/2/large.jpg\",\n \"friend\": null,\n \"follower\": null,\n \"follower_count\": 5,\n \"friend_count\": 5,\n \"mutual_friend_count\": 0,\n \"athlete_type\": 1,\n \"date_preference\": \"%m/%d/%Y\",\n \"measurement_preference\": \"feet\",\n \"clubs\": [],\n \"ftp\": null,\n \"weight\": 0,\n \"bikes\": [\n  {\n   \"id\": \"b1234567898765509876\",\n   \"primary\": true,\n   \"name\": \"EMC\",\n   \"resource_state\": 2,\n   \"distance\": 0\n  }\n ],\n \"shoes\": [\n  {\n   \"id\": \"g1234567898765509876\",\n   \"primary\": true,\n   \"name\": \"adidas\",\n   \"resource_state\": 2,\n   \"distance\": 4904\n  }\n ]\n}"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Get Zones",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete/zones",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athlete/zones",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athlete",
 								"zones"
 							]
 						},
 						"description": "Returns the the authenticated athlete's heart rate and power zones. Requires profile:read_all."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/zones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"zones"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "Heart rate and power zones.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/zones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"zones"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"distribution_buckets\": [\n   {\n    \"max\": 0,\n    \"min\": 0,\n    \"time\": 1498\n   },\n   {\n    \"max\": 50,\n    \"min\": 0,\n    \"time\": 62\n   },\n   {\n    \"max\": 100,\n    \"min\": 50,\n    \"time\": 169\n   },\n   {\n    \"max\": 150,\n    \"min\": 100,\n    \"time\": 536\n   },\n   {\n    \"max\": 200,\n    \"min\": 150,\n    \"time\": 672\n   },\n   {\n    \"max\": 250,\n    \"min\": 200,\n    \"time\": 821\n   },\n   {\n    \"max\": 300,\n    \"min\": 250,\n    \"time\": 529\n   },\n   {\n    \"max\": 350,\n    \"min\": 300,\n    \"time\": 251\n   },\n   {\n    \"max\": 400,\n    \"min\": 350,\n    \"time\": 80\n   },\n   {\n    \"max\": 450,\n    \"min\": 400,\n    \"time\": 81\n   },\n   {\n    \"max\": -1,\n    \"min\": 450,\n    \"time\": 343\n   }\n  ],\n  \"type\": \"power\",\n  \"resource_state\": 3,\n  \"sensor_based\": true\n }\n]"
+						}
+					]
 				},
 				{
 					"name": "List Athlete Activities",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete/activities?before={{before}}&after={{after}}&page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athlete/activities?before=<integer>&after=<integer>&page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athlete",
 								"activities"
 							],
 							"query": [
 								{
 									"key": "before",
-									"value": "{{before}}"
+									"value": "<integer>",
+									"description": "An epoch timestamp to use for filtering activities that have taken place before a certain time."
 								},
 								{
 									"key": "after",
-									"value": "{{after}}"
+									"value": "<integer>",
+									"description": "An epoch timestamp to use for filtering activities that have taken place after a certain time."
 								},
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							]
 						},
 						"description": "Returns the activities of an athlete for a specific identifier. Requires activity:read. Only Me activities will be filtered out unless requested by a token with activity:read_all."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/activities?before=<integer>&after=<integer>&page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"activities"
+									],
+									"query": [
+										{
+											"key": "before",
+											"value": "<integer>"
+										},
+										{
+											"key": "after",
+											"value": "<integer>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "The authenticated athlete's activities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/activities?before=<integer>&after=<integer>&page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"activities"
+									],
+									"query": [
+										{
+											"key": "before",
+											"value": "<integer>"
+										},
+										{
+											"key": "after",
+											"value": "<integer>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"resource_state\": 2,\n  \"athlete\": {\n   \"id\": 134815,\n   \"resource_state\": 1\n  },\n  \"name\": \"Happy Friday\",\n  \"distance\": 24931.4,\n  \"moving_time\": 4500,\n  \"elapsed_time\": 4500,\n  \"total_elevation_gain\": 0,\n  \"type\": \"Ride\",\n  \"workout_type\": null,\n  \"id\": 154504250376823,\n  \"external_id\": \"garmin_push_12345678987654321\",\n  \"upload_id\": 987654321234567900000,\n  \"start_date\": \"2018-05-02T12:15:09Z\",\n  \"start_date_local\": \"2018-05-02T05:15:09Z\",\n  \"timezone\": \"(GMT-08:00) America/Los_Angeles\",\n  \"utc_offset\": -25200,\n  \"start_latlng\": null,\n  \"end_latlng\": null,\n  \"location_city\": null,\n  \"location_state\": null,\n  \"location_country\": \"United States\",\n  \"achievement_count\": 0,\n  \"kudos_count\": 3,\n  \"comment_count\": 1,\n  \"athlete_count\": 1,\n  \"photo_count\": 0,\n  \"map\": {\n   \"id\": \"a12345678987654321\",\n   \"summary_polyline\": null,\n   \"resource_state\": 2\n  },\n  \"trainer\": true,\n  \"commute\": false,\n  \"manual\": false,\n  \"private\": false,\n  \"flagged\": false,\n  \"gear_id\": \"b12345678987654321\",\n  \"from_accepted_tag\": false,\n  \"average_speed\": 5.54,\n  \"max_speed\": 11,\n  \"average_cadence\": 67.1,\n  \"average_watts\": 175.3,\n  \"weighted_average_watts\": 210,\n  \"kilojoules\": 788.7,\n  \"device_watts\": true,\n  \"has_heartrate\": true,\n  \"average_heartrate\": 140.3,\n  \"max_heartrate\": 178,\n  \"max_watts\": 406,\n  \"pr_count\": 0,\n  \"total_photo_count\": 1,\n  \"has_kudoed\": false,\n  \"suffer_score\": 82\n },\n {\n  \"resource_state\": 2,\n  \"athlete\": {\n   \"id\": 167560,\n   \"resource_state\": 1\n  },\n  \"name\": \"Bondcliff\",\n  \"distance\": 23676.5,\n  \"moving_time\": 5400,\n  \"elapsed_time\": 5400,\n  \"total_elevation_gain\": 0,\n  \"type\": \"Ride\",\n  \"workout_type\": null,\n  \"id\": 1234567809,\n  \"external_id\": \"garmin_push_12345678987654321\",\n  \"upload_id\": 1234567819,\n  \"start_date\": \"2018-04-30T12:35:51Z\",\n  \"start_date_local\": \"2018-04-30T05:35:51Z\",\n  \"timezone\": \"(GMT-08:00) America/Los_Angeles\",\n  \"utc_offset\": -25200,\n  \"start_latlng\": null,\n  \"end_latlng\": null,\n  \"location_city\": null,\n  \"location_state\": null,\n  \"location_country\": \"United States\",\n  \"achievement_count\": 0,\n  \"kudos_count\": 4,\n  \"comment_count\": 0,\n  \"athlete_count\": 1,\n  \"photo_count\": 0,\n  \"map\": {\n   \"id\": \"a12345689\",\n   \"summary_polyline\": null,\n   \"resource_state\": 2\n  },\n  \"trainer\": true,\n  \"commute\": false,\n  \"manual\": false,\n  \"private\": false,\n  \"flagged\": false,\n  \"gear_id\": \"b12345678912343\",\n  \"from_accepted_tag\": false,\n  \"average_speed\": 4.385,\n  \"max_speed\": 8.8,\n  \"average_cadence\": 69.8,\n  \"average_watts\": 200,\n  \"weighted_average_watts\": 214,\n  \"kilojoules\": 1080,\n  \"device_watts\": true,\n  \"has_heartrate\": true,\n  \"average_heartrate\": 152.4,\n  \"max_heartrate\": 183,\n  \"max_watts\": 403,\n  \"pr_count\": 0,\n  \"total_photo_count\": 1,\n  \"has_kudoed\": false,\n  \"suffer_score\": 162\n }\n]"
+						}
+					]
 				},
 				{
 					"name": "List Athlete Clubs",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/athlete/clubs?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/athlete/clubs?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"athlete",
 								"clubs"
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							]
 						},
 						"description": "Returns a list of the clubs whose membership includes the authenticated athlete."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/clubs?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"clubs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A list of summary club representations.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/athlete/clubs?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"athlete",
+										"clubs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": 231407,\n  \"resource_state\": 2,\n  \"name\": \"The Strava Club\",\n  \"profile_medium\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/231407/5319085/1/medium.jpg\",\n  \"profile\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/231407/5319085/1/large.jpg\",\n  \"cover_photo\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/231407/5098428/4/large.jpg\",\n  \"cover_photo_small\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/231407/5098428/4/small.jpg\",\n  \"sport_type\": \"other\",\n  \"city\": \"San Francisco\",\n  \"state\": \"California\",\n  \"country\": \"United States\",\n  \"private\": false,\n  \"member_count\": 93151,\n  \"featured\": false,\n  \"verified\": true,\n  \"url\": \"strava\"\n }\n]"
+						}
+					]
 				}
 			],
-			"description": "Folder for athlete"
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "segments",
 			"item": [
 				{
-					"name": "Get Segment",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segments",
-								":id"
-							],
-							"variable": [
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get Segment",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the segment."
+										}
+									]
+								},
+								"description": "Returns the specified segment. read_all scope required in order to retrieve athlete-specific segment information, or to retrieve private segments."
+							},
+							"response": [
 								{
-									"key": "id",
-									"value": "{{id}}"
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "Representation of a segment.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": 229781,\n \"resource_state\": 3,\n \"name\": \"Hawk Hill\",\n \"activity_type\": \"Ride\",\n \"distance\": 2684.82,\n \"average_grade\": 5.7,\n \"maximum_grade\": 14.2,\n \"elevation_high\": 245.3,\n \"elevation_low\": 92.4,\n \"start_latlng\": [\n  37.8331119,\n  -122.4834356\n ],\n \"end_latlng\": [\n  37.8280722,\n  -122.4981393\n ],\n \"climb_category\": 1,\n \"city\": \"San Francisco\",\n \"state\": \"CA\",\n \"country\": \"United States\",\n \"private\": false,\n \"hazardous\": false,\n \"starred\": false,\n \"created_at\": \"2009-09-21T20:29:41Z\",\n \"updated_at\": \"2018-02-15T09:04:18Z\",\n \"total_elevation_gain\": 155.733,\n \"map\": {\n  \"id\": \"s229781\",\n  \"polyline\": \"}g|eFnpqjVl@En@Md@HbAd@d@^h@Xx@VbARjBDh@OPQf@w@d@k@XKXDFPH\\\\EbGT`AV`@v@|@NTNb@?XOb@cAxAWLuE@eAFMBoAv@eBt@q@b@}@tAeAt@i@dAC`AFZj@dB?~@[h@MbAVn@b@b@\\\\d@Eh@Qb@_@d@eB|@c@h@WfBK|AMpA?VF\\\\\\\\t@f@t@h@j@|@b@hCb@b@XTd@Bl@GtA?jAL`ALp@Tr@RXd@Rx@Pn@^Zh@Tx@Zf@`@FTCzDy@f@Yx@m@n@Op@VJr@\",\n  \"resource_state\": 3\n },\n \"effort_count\": 309974,\n \"athlete_count\": 30623,\n \"star_count\": 2428,\n \"athlete_segment_stats\": {\n  \"pr_elapsed_time\": 553,\n  \"pr_date\": \"1993-04-03\",\n  \"effort_count\": 2\n }\n}"
 								}
 							]
 						},
-						"description": "Returns the specified segment. read_all scope required in order to retrieve athlete-specific segment information, or to retrieve private segments."
-					},
-					"response": []
+						{
+							"name": "Star Segment",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "starred",
+											"value": false,
+											"description": "If true, star the segment; if false, unstar the segment."
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/segments/:id/starred",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										":id",
+										"starred"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the segment to star."
+										}
+									]
+								},
+								"description": "Stars/Unstars the given segment for the authenticated athlete. Requires profile:write scope."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "starred",
+													"value": false,
+													"description": {
+														"content": "If true, star the segment; if false, unstar the segment.",
+														"type": "text/plain"
+													}
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/starred",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"starred"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "Representation of a segment.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "starred",
+													"value": false,
+													"description": {
+														"content": "If true, star the segment; if false, unstar the segment.",
+														"type": "text/plain"
+													}
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/starred",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"starred"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": 229781,\n \"resource_state\": 3,\n \"name\": \"Hawk Hill\",\n \"activity_type\": \"Ride\",\n \"distance\": 2684.82,\n \"average_grade\": 5.7,\n \"maximum_grade\": 14.2,\n \"elevation_high\": 245.3,\n \"elevation_low\": 92.4,\n \"start_latlng\": [\n  37.8331119,\n  -122.4834356\n ],\n \"end_latlng\": [\n  37.8280722,\n  -122.4981393\n ],\n \"climb_category\": 1,\n \"city\": \"San Francisco\",\n \"state\": \"CA\",\n \"country\": \"United States\",\n \"private\": false,\n \"hazardous\": false,\n \"starred\": false,\n \"created_at\": \"2009-09-21T20:29:41Z\",\n \"updated_at\": \"2018-02-15T09:04:18Z\",\n \"total_elevation_gain\": 155.733,\n \"map\": {\n  \"id\": \"s229781\",\n  \"polyline\": \"}g|eFnpqjVl@En@Md@HbAd@d@^h@Xx@VbARjBDh@OPQf@w@d@k@XKXDFPH\\\\EbGT`AV`@v@|@NTNb@?XOb@cAxAWLuE@eAFMBoAv@eBt@q@b@}@tAeAt@i@dAC`AFZj@dB?~@[h@MbAVn@b@b@\\\\d@Eh@Qb@_@d@eB|@c@h@WfBK|AMpA?VF\\\\\\\\t@f@t@h@j@|@b@hCb@b@XTd@Bl@GtA?jAL`ALp@Tr@RXd@Rx@Pn@^Zh@Tx@Zf@`@FTCzDy@f@Yx@m@n@Op@VJr@\",\n  \"resource_state\": 3\n },\n \"effort_count\": 309974,\n \"athlete_count\": 30623,\n \"star_count\": 2428,\n \"athlete_segment_stats\": {\n  \"pr_elapsed_time\": 553,\n  \"pr_date\": \"1993-04-03\",\n  \"effort_count\": 2\n }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Segment Leaderboard",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/:id/leaderboard?gender=<string>&age_group=<string>&weight_class=<string>&following=<boolean>&club_id=<long>&date_range=<string>&context_entries=<integer>&page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										":id",
+										"leaderboard"
+									],
+									"query": [
+										{
+											"key": "gender",
+											"value": "<string>",
+											"description": "Filter by gender."
+										},
+										{
+											"key": "age_group",
+											"value": "<string>",
+											"description": "Summit Feature. Filter by age group."
+										},
+										{
+											"key": "weight_class",
+											"value": "<string>",
+											"description": "Summit Feature. Filter by weight class."
+										},
+										{
+											"key": "following",
+											"value": "<boolean>",
+											"description": "Filter by friends of the authenticated athlete."
+										},
+										{
+											"key": "club_id",
+											"value": "<long>",
+											"description": "Filter by club."
+										},
+										{
+											"key": "date_range",
+											"value": "<string>",
+											"description": "Filter by date range, will be in the athlete's timezone"
+										},
+										{
+											"key": "context_entries",
+											"value": "<integer>"
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number."
+										},
+										{
+											"key": "per_page",
+											"value": "30",
+											"description": "Number of items per page. Defaults to 30."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the segment leaderboard."
+										}
+									]
+								},
+								"description": "Returns the specified segment leaderboard."
+							},
+							"response": [
+								{
+									"name": "Representation of a segment leaderboard.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/leaderboard?gender=<string>&age_group=<string>&weight_class=<string>&following=<boolean>&club_id=<long>&date_range=<string>&context_entries=<integer>&page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"leaderboard"
+											],
+											"query": [
+												{
+													"key": "gender",
+													"value": "<string>"
+												},
+												{
+													"key": "age_group",
+													"value": "<string>"
+												},
+												{
+													"key": "weight_class",
+													"value": "<string>"
+												},
+												{
+													"key": "following",
+													"value": "<boolean>"
+												},
+												{
+													"key": "club_id",
+													"value": "<long>"
+												},
+												{
+													"key": "date_range",
+													"value": "<string>"
+												},
+												{
+													"key": "context_entries",
+													"value": "<integer>"
+												},
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"effort_count\": 30756,\n \"entry_count\": 30756,\n \"kom_type\": \"kom\",\n \"entries\": [\n  {\n   \"athlete_name\": \"Peter S.\",\n   \"elapsed_time\": 346,\n   \"moving_time\": 346,\n   \"start_date\": \"1993-04-03T15:37:43Z\",\n   \"start_date_local\": \"1993-04-03T07:37:43Z\",\n   \"rank\": 1\n  }\n ]\n}"
+								},
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/leaderboard?gender=<string>&age_group=<string>&weight_class=<string>&following=<boolean>&club_id=<long>&date_range=<string>&context_entries=<integer>&page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"leaderboard"
+											],
+											"query": [
+												{
+													"key": "gender",
+													"value": "<string>"
+												},
+												{
+													"key": "age_group",
+													"value": "<string>"
+												},
+												{
+													"key": "weight_class",
+													"value": "<string>"
+												},
+												{
+													"key": "following",
+													"value": "<boolean>"
+												},
+												{
+													"key": "club_id",
+													"value": "<long>"
+												},
+												{
+													"key": "date_range",
+													"value": "<string>"
+												},
+												{
+													"key": "context_entries",
+													"value": "<integer>"
+												},
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								}
+							]
+						},
+						{
+							"name": "List Segment Efforts",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/:id/all_efforts?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										":id",
+										"all_efforts"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number."
+										},
+										{
+											"key": "per_page",
+											"value": "30",
+											"description": "Number of items per page. Defaults to 30."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<integer>",
+											"description": "(Required) The identifier of the segment."
+										}
+									]
+								},
+								"description": "Returns a set of the authenticated athlete's segment efforts for a given segment."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/all_efforts?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"all_efforts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "List of segment efforts.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/all_efforts?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"all_efforts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": 123456789,\n  \"resource_state\": 2,\n  \"name\": \"Alpe d'Huez\",\n  \"activity\": {\n   \"id\": 1234567890,\n   \"resource_state\": 1\n  },\n  \"athlete\": {\n   \"id\": 123445678689,\n   \"resource_state\": 1\n  },\n  \"elapsed_time\": 1657,\n  \"moving_time\": 1642,\n  \"start_date\": \"2007-09-15T08:15:29Z\",\n  \"start_date_local\": \"2007-09-15T09:15:29Z\",\n  \"distance\": 6148.92,\n  \"start_index\": 1102,\n  \"end_index\": 1366,\n  \"device_watts\": false,\n  \"average_watts\": 220.2,\n  \"segment\": {\n   \"id\": 788127,\n   \"resource_state\": 2,\n   \"name\": \"Alpe d'Huez\",\n   \"activity_type\": \"Ride\",\n   \"distance\": 6297.46,\n   \"average_grade\": 4.8,\n   \"maximum_grade\": 16.3,\n   \"elevation_high\": 416,\n   \"elevation_low\": 104.6,\n   \"start_latlng\": [\n    52.98501000581467,\n    -3.1869720001197366\n   ],\n   \"end_latlng\": [\n    53.02204074375785,\n    -3.2039630001245736\n   ],\n   \"climb_category\": 2,\n   \"city\": \"Le Bourg D'Oisans\",\n   \"state\": \"RA\",\n   \"country\": \"France\",\n   \"private\": false,\n   \"hazardous\": false,\n   \"starred\": false\n  },\n  \"kom_rank\": null,\n  \"pr_rank\": null,\n  \"achievements\": []\n }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get Segment Streams",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/:id/streams?keys=<string>,<string>&key_by_type=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										":id",
+										"streams"
+									],
+									"query": [
+										{
+											"key": "keys",
+											"value": "<string>,<string>",
+											"description": "(Required) The types of streams to return."
+										},
+										{
+											"key": "key_by_type",
+											"value": "true",
+											"description": "(Required) Must be true."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the segment."
+										}
+									]
+								},
+								"description": "Returns the given segment's streams. Requires read_all scope for private segments."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/streams?keys=<string>,<string>&key_by_type=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"streams"
+											],
+											"query": [
+												{
+													"key": "keys",
+													"value": "<string>,<string>"
+												},
+												{
+													"key": "key_by_type",
+													"value": "true"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "The set of requested streams.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/segments/:id/streams?keys=<string>,<string>&key_by_type=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"segments",
+												":id",
+												"streams"
+											],
+											"query": [
+												{
+													"key": "keys",
+													"value": "<string>,<string>"
+												},
+												{
+													"key": "key_by_type",
+													"value": "true"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"type\": \"latlng\",\n  \"data\": [\n   [\n    37.833112,\n    -122.483436\n   ],\n   [\n    37.832964,\n    -122.483406\n   ]\n  ],\n  \"series_type\": \"distance\",\n  \"original_size\": 2,\n  \"resolution\": \"high\"\n },\n {\n  \"type\": \"distance\",\n  \"data\": [\n   0,\n   16.8\n  ],\n  \"series_type\": \"distance\",\n  \"original_size\": 2,\n  \"resolution\": \"high\"\n },\n {\n  \"type\": \"altitude\",\n  \"data\": [\n   92.4,\n   93.4\n  ],\n  \"series_type\": \"distance\",\n  \"original_size\": 2,\n  \"resolution\": \"high\"\n }\n]"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
 					"name": "List Starred Segments",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/starred?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/segments/starred?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"segments",
 								"starred"
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							]
 						},
 						"description": "List of the authenticated athlete's starred segments. Private segments are filtered out unless requested by a token with read_all scope."
 					},
-					"response": []
-				},
-				{
-					"name": "Star Segment",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "starred",
-									"value": false,
-									"type": "text"
+					"response": [
+						{
+							"name": "List of the authenticated athlete's starred segments.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/starred?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										"starred"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
 								}
-							]
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 229781,\n \"resource_state\": 3,\n \"name\": \"Hawk Hill\",\n \"activity_type\": \"Ride\",\n \"distance\": 2684.82,\n \"average_grade\": 5.7,\n \"maximum_grade\": 14.2,\n \"elevation_high\": 245.3,\n \"elevation_low\": 92.4,\n \"start_latlng\": [\n  37.8331119,\n  -122.4834356\n ],\n \"end_latlng\": [\n  37.8280722,\n  -122.4981393\n ],\n \"climb_category\": 1,\n \"city\": \"San Francisco\",\n \"state\": \"CA\",\n \"country\": \"United States\",\n \"private\": false,\n \"hazardous\": false,\n \"starred\": false,\n \"created_at\": \"2009-09-21T20:29:41Z\",\n \"updated_at\": \"2018-02-15T09:04:18Z\",\n \"total_elevation_gain\": 155.733,\n \"map\": {\n  \"id\": \"s229781\",\n  \"polyline\": \"}g|eFnpqjVl@En@Md@HbAd@d@^h@Xx@VbARjBDh@OPQf@w@d@k@XKXDFPH\\\\EbGT`AV`@v@|@NTNb@?XOb@cAxAWLuE@eAFMBoAv@eBt@q@b@}@tAeAt@i@dAC`AFZj@dB?~@[h@MbAVn@b@b@\\\\d@Eh@Qb@_@d@eB|@c@h@WfBK|AMpA?VF\\\\\\\\t@f@t@h@j@|@b@hCb@b@XTd@Bl@GtA?jAL`ALp@Tr@RXd@Rx@Pn@^Zh@Tx@Zf@`@FTCzDy@f@Yx@m@n@Op@VJr@\",\n  \"resource_state\": 3\n },\n \"effort_count\": 309974,\n \"athlete_count\": 30623,\n \"star_count\": 2428,\n \"athlete_segment_stats\": {\n  \"pr_elapsed_time\": 553,\n  \"pr_date\": \"1993-04-03\",\n  \"effort_count\": 2\n }\n}"
 						},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/:id/starred",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segments",
-								":id",
-								"starred"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/starred?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										"starred"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									]
 								}
-							]
-						},
-						"description": "Stars/Unstars the given segment for the authenticated athlete. Requires profile:write scope."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Segment Leaderboard",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/:id/leaderboard?gender={{gender}}&age_group={{age_group}}&weight_class={{weight_class}}&following={{following}}&club_id={{club_id}}&date_range={{date_range}}&context_entries={{context_entries}}&page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segments",
-								":id",
-								"leaderboard"
-							],
-							"query": [
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "gender",
-									"value": "{{gender}}"
-								},
-								{
-									"key": "age_group",
-									"value": "{{age_group}}"
-								},
-								{
-									"key": "weight_class",
-									"value": "{{weight_class}}"
-								},
-								{
-									"key": "following",
-									"value": "{{following}}"
-								},
-								{
-									"key": "club_id",
-									"value": "{{club_id}}"
-								},
-								{
-									"key": "date_range",
-									"value": "{{date_range}}"
-								},
-								{
-									"key": "context_entries",
-									"value": "{{context_entries}}"
-								},
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns the specified segment leaderboard."
-					},
-					"response": []
-				},
-				{
-					"name": "List Segment Efforts",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/:id/all_efforts?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segments",
-								":id",
-								"all_efforts"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
-								},
-								{
-									"key": "per_page",
-									"value": "30"
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns a set of the authenticated athlete's segment efforts for a given segment."
-					},
-					"response": []
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Explore segments",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/explore?bounds={{bounds}}&activity_type={{activity_type}}&min_cat={{min_cat}}&max_cat={{max_cat}}",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/segments/explore?bounds=<float>,<float>&activity_type=<string>&min_cat=<integer>&max_cat=<integer>",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"segments",
 								"explore"
 							],
 							"query": [
 								{
 									"key": "bounds",
-									"value": "{{bounds}}"
+									"value": "<float>,<float>",
+									"description": "(Required) The latitude and longitude for two points describing a rectangular boundary for the search: [southwest corner latitutde, southwest corner longitude, northeast corner latitude, northeast corner longitude]"
 								},
 								{
 									"key": "activity_type",
-									"value": "{{activity_type}}"
+									"value": "<string>",
+									"description": "Desired activity type."
 								},
 								{
 									"key": "min_cat",
-									"value": "{{min_cat}}"
+									"value": "<integer>",
+									"description": "The minimum climbing category."
 								},
 								{
 									"key": "max_cat",
-									"value": "{{max_cat}}"
+									"value": "<integer>",
+									"description": "The maximum climbing category."
 								}
 							]
 						},
 						"description": "Returns the top 10 segments matching a specified query."
 					},
-					"response": []
-				},
-				{
-					"name": "Get Segment Streams",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/segments/:id/streams?keys={{keys}}&key_by_type=true",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"segments",
-								":id",
-								"streams"
-							],
-							"query": [
+					"response": [
+						{
+							"name": "List of matching segments.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/explore?bounds=<float>,<float>&activity_type=<string>&min_cat=<integer>&max_cat=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										"explore"
+									],
+									"query": [
+										{
+											"key": "bounds",
+											"value": "<float>,<float>"
+										},
+										{
+											"key": "activity_type",
+											"value": "<string>"
+										},
+										{
+											"key": "min_cat",
+											"value": "<integer>"
+										},
+										{
+											"key": "max_cat",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "keys",
-									"value": "{{keys}}"
-								},
-								{
-									"key": "key_by_type",
-									"value": "true"
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
+							"cookie": [],
+							"body": "{\n \"segments\": [\n  {\n   \"id\": 229781,\n   \"resource_state\": 2,\n   \"name\": \"Hawk Hill\",\n   \"climb_category\": 1,\n   \"climb_category_desc\": \"4\",\n   \"avg_grade\": 5.7,\n   \"start_latlng\": [\n    37.8331119,\n    -122.4834356\n   ],\n   \"end_latlng\": [\n    37.8280722,\n    -122.4981393\n   ],\n   \"elev_difference\": 152.8,\n   \"distance\": 2684.8,\n   \"points\": \"}g|eFnpqjVl@En@Md@HbAd@d@^h@Xx@VbARjBDh@OPQf@w@d@k@XKXDFPH\\\\EbGT`AV`@v@|@NTNb@?XOb@cAxAWLuE@eAFMBoAv@eBt@q@b@}@tAeAt@i@dAC`AFZj@dB?~@[h@MbAVn@b@b@\\\\d@Eh@Qb@_@d@eB|@c@h@WfBK|AMpA?VF\\\\\\\\t@f@t@h@j@|@b@hCb@b@XTd@Bl@GtA?jAL`ALp@Tr@RXd@Rx@Pn@^Zh@Tx@Zf@`@FTCzDy@f@Yx@m@n@Op@VJr@\",\n   \"starred\": false\n  }\n ]\n}"
 						},
-						"description": "Returns the given segment's streams. Requires read_all scope for private segments."
-					},
-					"response": []
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segments/explore?bounds=<float>,<float>&activity_type=<string>&min_cat=<integer>&max_cat=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segments",
+										"explore"
+									],
+									"query": [
+										{
+											"key": "bounds",
+											"value": "<float>,<float>"
+										},
+										{
+											"key": "activity_type",
+											"value": "<string>"
+										},
+										{
+											"key": "min_cat",
+											"value": "<integer>"
+										},
+										{
+											"key": "max_cat",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				}
 			],
-			"description": "Folder for segments"
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "segment_efforts",
+			"name": "segment efforts/{id}",
 			"item": [
 				{
 					"name": "Get Segment Effort",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/segment_efforts/:id",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/segment_efforts/:id",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"segment_efforts",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<long>",
+									"description": "(Required) The identifier of the segment effort."
 								}
 							]
 						},
 						"description": "Returns a segment effort from an activity that is owned by the authenticated athlete."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Representation of a segment effort.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segment_efforts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segment_efforts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1234556789,\n \"resource_state\": 3,\n \"name\": \"Alpe d'Huez\",\n \"activity\": {\n  \"id\": 3454504,\n  \"resource_state\": 1\n },\n \"athlete\": {\n  \"id\": 54321,\n  \"resource_state\": 1\n },\n \"elapsed_time\": 381,\n \"moving_time\": 340,\n \"start_date\": \"2018-02-12T16:12:41Z\",\n \"start_date_local\": \"2018-02-12T08:12:41Z\",\n \"distance\": 83,\n \"start_index\": 65,\n \"end_index\": 83,\n \"segment\": {\n  \"id\": 63450,\n  \"resource_state\": 2,\n  \"name\": \"Alpe d'Huez\",\n  \"activity_type\": \"Run\",\n  \"distance\": 780.35,\n  \"average_grade\": -0.5,\n  \"maximum_grade\": 0,\n  \"elevation_high\": 21,\n  \"elevation_low\": 17.2,\n  \"start_latlng\": [\n   37.808407654682,\n   -122.426682919323\n  ],\n  \"end_latlng\": [\n   37.808297909724,\n   -122.421324329674\n  ],\n  \"climb_category\": 0,\n  \"city\": \"San Francisco\",\n  \"state\": \"CA\",\n  \"country\": \"United States\",\n  \"private\": false,\n  \"hazardous\": false,\n  \"starred\": false\n },\n \"kom_rank\": null,\n \"pr_rank\": null,\n \"achievements\": [],\n \"athlete_segment_stats\": {\n  \"pr_elapsed_time\": 212,\n  \"pr_date\": \"2015-02-12\",\n  \"effort_count\": 149\n }\n}"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segment_efforts/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segment_efforts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Get Segment Effort Streams",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/segment_efforts/:id/streams?keys={{keys}}&key_by_type=true",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/segment_efforts/:id/streams?keys=<string>,<string>&key_by_type=true",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"segment_efforts",
 								":id",
 								"streams"
@@ -696,535 +1834,1525 @@
 							"query": [
 								{
 									"key": "keys",
-									"value": "{{keys}}"
+									"value": "<string>,<string>",
+									"description": "(Required) The types of streams to return."
 								},
 								{
 									"key": "key_by_type",
-									"value": "true"
+									"value": "true",
+									"description": "(Required) Must be true."
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<long>",
+									"description": "(Required) The identifier of the segment effort."
 								}
 							]
 						},
 						"description": "Returns a set of streams for a segment effort completed by the authenticated athlete. Requires read_all scope."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segment_efforts/:id/streams?keys=<string>,<string>&key_by_type=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segment_efforts",
+										":id",
+										"streams"
+									],
+									"query": [
+										{
+											"key": "keys",
+											"value": "<string>,<string>"
+										},
+										{
+											"key": "key_by_type",
+											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "The set of requested streams.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/segment_efforts/:id/streams?keys=<string>,<string>&key_by_type=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"segment_efforts",
+										":id",
+										"streams"
+									],
+									"query": [
+										{
+											"key": "keys",
+											"value": "<string>,<string>"
+										},
+										{
+											"key": "key_by_type",
+											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"type\": \"distance\",\n  \"data\": [\n   904.5,\n   957.8,\n   963.1,\n   989.1,\n   1011.9,\n   1049.7,\n   1082.4,\n   1098.1,\n   1113.2,\n   1124.7,\n   1139.2,\n   1142.1,\n   1170.4,\n   1173\n  ],\n  \"series_type\": \"distance\",\n  \"original_size\": 14,\n  \"resolution\": \"high\"\n }\n]"
+						}
+					]
 				}
 			],
-			"description": "Folder for segment_efforts"
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "running_races",
+			"name": "running races",
 			"item": [
+				{
+					"name": "List Running Races",
+					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/running_races?year=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"running_races"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "<integer>",
+									"description": "Filters the list by a given year."
+								}
+							]
+						},
+						"description": "Returns a list running races based on a set of search criteria."
+					},
+					"response": [
+						{
+							"name": "Representation of a list of running race.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/running_races?year=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"running_races"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"value\": \"reference https://developers.strava.com/swagger/running_race.json#/RunningRace not found in the OpenAPI spec\"\n },\n {\n  \"value\": \"reference https://developers.strava.com/swagger/running_race.json#/RunningRace not found in the OpenAPI spec\"\n }\n]"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/running_races?year=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"running_races"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
+				},
 				{
 					"name": "Get Running Race",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/running_races/:id",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/running_races/:id",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"running_races",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the running race."
 								}
 							]
 						},
 						"description": "Returns a running race for a given identifier."
 					},
-					"response": []
-				},
-				{
-					"name": "List Running Races",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/running_races?year={{year}}",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"running_races"
-							],
-							"query": [
-								{
-									"key": "year",
-									"value": "{{year}}"
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/running_races/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"running_races",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
 								}
-							]
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
 						},
-						"description": "Returns a list running races based on a set of search criteria."
-					},
-					"response": []
+						{
+							"name": "Representation of a running race.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/running_races/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"running_races",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				}
 			],
-			"description": "Folder for running_races"
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "activities",
 			"item": [
 				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get Activity",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id?include_all_efforts=<boolean>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id"
+									],
+									"query": [
+										{
+											"key": "include_all_efforts",
+											"value": "<boolean>",
+											"description": "To include all segments efforts."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Returns the given activity that is owned by the authenticated athlete. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id?include_all_efforts=<boolean>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id"
+											],
+											"query": [
+												{
+													"key": "include_all_efforts",
+													"value": "<boolean>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "The activity's detailed representation.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id?include_all_efforts=<boolean>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id"
+											],
+											"query": [
+												{
+													"key": "include_all_efforts",
+													"value": "<boolean>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": 12345678987654320,\n \"resource_state\": 3,\n \"external_id\": \"garmin_push_12345678987654321\",\n \"upload_id\": 98765432123456780,\n \"athlete\": {\n  \"id\": 134815,\n  \"resource_state\": 1\n },\n \"name\": \"Happy Friday\",\n \"distance\": 28099,\n \"moving_time\": 4207,\n \"elapsed_time\": 4410,\n \"total_elevation_gain\": 516,\n \"type\": \"Ride\",\n \"start_date\": \"2018-02-16T14:52:54Z\",\n \"start_date_local\": \"2018-02-16T06:52:54Z\",\n \"timezone\": \"(GMT-08:00) America/Los_Angeles\",\n \"utc_offset\": -28800,\n \"start_latlng\": [\n  37.83,\n  -122.26\n ],\n \"end_latlng\": [\n  37.83,\n  -122.26\n ],\n \"achievement_count\": 0,\n \"kudos_count\": 19,\n \"comment_count\": 0,\n \"athlete_count\": 1,\n \"photo_count\": 0,\n \"map\": {\n  \"id\": \"a1410355832\",\n  \"polyline\": \"ki{eFvqfiVqAWQIGEEKAYJgBVqDJ{BHa@jAkNJw@Pw@V{APs@^aABQAOEQGKoJ_FuJkFqAo@{A}@sH{DiAs@Q]?WVy@`@oBt@_CB]KYMMkB{AQEI@WT{BlE{@zAQPI@ICsCqA_BcAeCmAaFmCqIoEcLeG}KcG}A}@cDaBiDsByAkAuBqBi@y@_@o@o@kB}BgIoA_EUkAMcACa@BeBBq@LaAJe@b@uA`@_AdBcD`@iAPq@RgALqAB{@EqAyAoOCy@AmCBmANqBLqAZkB\\\\iCPiBJwCCsASiCq@iD]eA]y@[i@w@mAa@i@k@g@kAw@i@Ya@Q]EWFMLa@~BYpAFNpA`Aj@n@X`@V`AHh@JfB@xAMvAGZGHIDIAWOEQNcC@sACYK[MSOMe@QKKKYOs@UYQISCQ?Q@WNo@r@OHGAGCKOQ_BU}@MQGG]Io@@c@FYNg@d@s@d@ODQAMOMaASs@_@a@SESAQDqBn@a@RO?KK?UBU\\\\kA@Y?WMo@Iy@GWQ_@WSSGg@AkABQB_Ap@_A^o@b@Q@o@IS@OHi@n@OFS?OI}@iAQMQGQC}@DOIIUK{@IUOMyBo@kASOKIQCa@L[|AgATWN[He@?QKw@FOPCh@Fx@l@TDLELKl@aAHIJEX@r@ZTDV@LENQVg@RkA@c@MeA?WFOPMf@Ej@Fj@@LGHKDM?_@_@iC?a@HKRIl@NT?FCHMFW?YEYGWQa@GYBiAIq@Gq@L_BHSHK|@WJETSLQZs@z@_A~@uA^U`@G\\\\CRB\\\\Tl@p@Th@JZ^bB`@lAHLXVLDP?LGFSKiDBo@d@wBVi@R]VYVE\\\\@`@Lh@Fh@CzAk@RSDQA]GYe@eAGWSiBAWBWBIJORK`@KPOPSTg@h@}Ad@o@F[E_@EGMKUGmAEYGMIMYKs@?a@J}@@_BD_@HQJMx@e@LKHKHWAo@UoAAWFmAH}@?w@C[YwAAc@HSNM|Ao@rA}@zAq@`@a@j@eAxAuBXQj@MXSR[b@gAFg@?YISOGaAHi@Xw@v@_@d@WRSFqARUHQJc@d@m@`A[VSFUBcAEU@WFULUPa@v@Y~@UrBc@dBI~@?l@P~ABt@N`HEjA]zAEp@@p@TrBCl@CTQb@k@dAg@jAU^KJYLK@k@A[Js@d@a@b@]RgBl@[FMAw@[]G]?m@D_@F]P[Vu@t@[TMF_@Do@E_@@q@P]PWZUZw@vAkAlAGJOj@IlAMd@OR{@p@a@d@sBpD]v@a@`Aa@n@]TODgBVk@Pe@^cBfBc@Rs@La@RSPm@|@wCpDS^Wp@QZML{@l@qBbCYd@k@lAIVCZBZNTr@`@RRHZANIZQPKDW@e@CaASU?I@YTKRQx@@\\\\VmALYRQLCL?v@P|@D\\\\GJEFKDM@OCa@COOYIGm@YMUCM@]JYr@uAx@kAt@}@jAeAPWbAkBj@s@bAiAz@oAj@m@VQlAc@VQ~@aA`Au@p@Q`AIv@MZORUV_@p@iB|AoCh@q@dAaANUNWH[N{AJ[^m@t@_Av@wA\\\\a@`@W`@In@Al@B^E`@Wl@u@\\\\[VQ\\\\K`@Eb@?R@dAZP@d@CRExAs@\\\\Yt@{@LG\\\\MjAATINOXo@d@kAl@_AHYBOCe@QiBCm@Fq@\\\\wADo@AyGEeBWuB@YHu@Tu@Lk@VcCTo@d@aA\\\\WJE`@G~@FP?VI\\\\U~@sANO`@SfAMj@U\\\\WjAsAXS`@UNENALBHFFL?^Ml@Uj@]b@q@RUJSPkChEc@XcAb@sA|@]PaA\\\\OJKNER?TDTNj@Jn@?p@OfC@ZR`B@VCV_@n@{@l@WbACv@OlABnAPl@LNNHbBBNBLFFJ@^GLg@x@i@|AMP[X}@XOJKPET?l@LhAFXp@fBDRCd@S\\\\_@Ps@PQ@}A]S?QDe@V]b@MR[fAKt@ErAF~CANILYDKGIKe@{@Yy@e@sB[gA[c@e@YUCU?WBUHUNQPq@`AiArAMV[^e@Zc@JQJKNMz@?r@Bb@PfAAfA@VVbADn@E`@KHSEe@SMAKDKFM\\\\^dDCh@m@LoAQ_@@MFOZLfBEl@QbASd@KLQBOAaAc@QAQ@QHc@v@ONMJOBOCg@c@]O[EMBKFGL?RHv@ARERGNe@h@{@h@WVGNDt@JLNFPFz@LdBf@f@PJNHPF`ADPJJJDl@I`@B^Tp@bALJNDNALIf@i@PGPCt@DNE`@Uv@[dAw@RITGRCtAARBPJLPJRZxB?VEX_@vAAR?RDNHJJBh@UnBm@h@IRDRJNNJPNbBFRJLLBLCzAmAd@Uf@Gf@?P@PFJNHPFTH`BDTHNJJJ@LG`@m@^YPER@RDPHNNJRLn@HRLN^VNPHTFX@\\\\UlDFb@FHh@NP@HKPsB?}ASkCQ{@[y@q@}@cA{@KOCQDa@t@{CFGJCf@Nl@ZtA~@r@p@`@h@rAxBd@rA\\\\fARdAPjANrB?f@AtBCd@QfBkAjJOlBChA?rBFrBNlBdAfKFzAC~@Iz@Mz@Sv@s@jBmAxBi@hAWt@Sv@Qx@O`BA`@?dAPfBVpAd@`BfBlFf@fBdA~Cr@pAz@fApBhBjAt@H?IL?FBFJLx@^lHvDvh@~XnElCbAd@pGhDbAb@nAr@`Ad@`GhDnBbAxCbBrWhNJJDPARGP_@t@Qh@]pAUtAoA`Ny@jJApBBNFLJFJBv@Hb@HBF?\\\\\",\n  \"resource_state\": 3,\n  \"summary_polyline\": \"ki{eFvqfiVsBmA`Feh@qg@iX`B}JeCcCqGjIq~@kf@cM{KeHeX`@_GdGkSeBiXtB}YuEkPwFyDeAzAe@pC~DfGc@bIOsGmCcEiD~@oBuEkFhBcBmDiEfAVuDiAuD}NnDaNiIlCyDD_CtJKv@wGhD]YyEzBo@g@uKxGmHpCGtEtI~AuLrHkAcAaIvEgH_EaDR_FpBuBg@sNxHqEtHgLoTpIiCzKNr[sB|Es\\\\`JyObYeMbGsMnPsAfDxAnD}DBu@bCx@{BbEEyAoD`AmChNoQzMoGhOwX|[yIzBeFKg[zAkIdU_LiHxK}HzEh@vM_BtBg@xGzDbCcF~GhArHaIfByAhLsDiJuC?_HbHd@nL_Cz@ZnEkDDy@hHwJLiCbIrNrIvN_EfAjDWlEnEiAfBxDlFkBfBtEfDaAzBvDKdFx@|@XgJmDsHhAgD`GfElEzOwBnYdBxXgGlSc@bGdHpW|HdJztBnhAgFxc@HnCvBdA\"\n },\n \"trainer\": false,\n \"commute\": false,\n \"manual\": false,\n \"private\": false,\n \"flagged\": false,\n \"gear_id\": \"b12345678987654321\",\n \"from_accepted_tag\": false,\n \"average_speed\": 6.679,\n \"max_speed\": 18.5,\n \"average_cadence\": 78.5,\n \"average_temp\": 4,\n \"average_watts\": 185.5,\n \"weighted_average_watts\": 230,\n \"kilojoules\": 780.5,\n \"device_watts\": true,\n \"has_heartrate\": false,\n \"max_watts\": 743,\n \"elev_high\": 446.6,\n \"elev_low\": 17.2,\n \"pr_count\": 0,\n \"total_photo_count\": 2,\n \"has_kudoed\": false,\n \"workout_type\": 10,\n \"suffer_score\": null,\n \"description\": \"\",\n \"calories\": 870.2,\n \"segment_efforts\": [\n  {\n   \"id\": 12345678987654320,\n   \"resource_state\": 2,\n   \"name\": \"Tunnel Rd.\",\n   \"activity\": {\n    \"id\": 12345678987654320,\n    \"resource_state\": 1\n   },\n   \"athlete\": {\n    \"id\": 134815,\n    \"resource_state\": 1\n   },\n   \"elapsed_time\": 2038,\n   \"moving_time\": 2038,\n   \"start_date\": \"2018-02-16T14:56:25Z\",\n   \"start_date_local\": \"2018-02-16T06:56:25Z\",\n   \"distance\": 9434.8,\n   \"start_index\": 211,\n   \"end_index\": 2246,\n   \"average_cadence\": 78.6,\n   \"device_watts\": true,\n   \"average_watts\": 237.6,\n   \"segment\": {\n    \"id\": 673683,\n    \"resource_state\": 2,\n    \"name\": \"Tunnel Rd.\",\n    \"activity_type\": \"Ride\",\n    \"distance\": 9220.7,\n    \"average_grade\": 4.2,\n    \"maximum_grade\": 25.8,\n    \"elevation_high\": 426.5,\n    \"elevation_low\": 43.4,\n    \"start_latlng\": [\n     37.8346153,\n     -122.2520872\n    ],\n    \"end_latlng\": [\n     37.8476261,\n     -122.2008944\n    ],\n    \"climb_category\": 3,\n    \"city\": \"Oakland\",\n    \"state\": \"CA\",\n    \"country\": \"United States\",\n    \"private\": false,\n    \"hazardous\": false,\n    \"starred\": false\n   },\n   \"kom_rank\": null,\n   \"pr_rank\": null,\n   \"achievements\": [],\n   \"hidden\": false\n  }\n ],\n \"splits_metric\": [\n  {\n   \"distance\": 1001.5,\n   \"elapsed_time\": 141,\n   \"elevation_difference\": 4.4,\n   \"moving_time\": 141,\n   \"split\": 1,\n   \"average_speed\": 7.1,\n   \"pace_zone\": 0\n  }\n ],\n \"laps\": [\n  {\n   \"id\": 4479306946,\n   \"resource_state\": 2,\n   \"name\": \"Lap 1\",\n   \"activity\": {\n    \"id\": 1410355832,\n    \"resource_state\": 1\n   },\n   \"athlete\": {\n    \"id\": 134815,\n    \"resource_state\": 1\n   },\n   \"elapsed_time\": 1573,\n   \"moving_time\": 1569,\n   \"start_date\": \"2018-02-16T14:52:54Z\",\n   \"start_date_local\": \"2018-02-16T06:52:54Z\",\n   \"distance\": 8046.72,\n   \"start_index\": 0,\n   \"end_index\": 1570,\n   \"total_elevation_gain\": 276,\n   \"average_speed\": 5.12,\n   \"max_speed\": 9.5,\n   \"average_cadence\": 78.6,\n   \"device_watts\": true,\n   \"average_watts\": 233.1,\n   \"lap_index\": 1,\n   \"split\": 1\n  }\n ],\n \"gear\": {\n  \"id\": \"b12345678987654321\",\n  \"primary\": true,\n  \"name\": \"Tarmac\",\n  \"resource_state\": 2,\n  \"distance\": 32547610\n },\n \"partner_brand_tag\": null,\n \"photos\": {\n  \"primary\": {\n   \"id\": null,\n   \"unique_id\": \"3FDGKL3-204E-4867-9E8D-89FC79EAAE17\",\n   \"urls\": {\n    \"100\": \"https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-128x96.jpg\",\n    \"600\": \"https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-768x576.jpg\"\n   },\n   \"source\": 1\n  },\n  \"use_primary_photo\": true,\n  \"count\": 2\n },\n \"highlighted_kudosers\": [\n  {\n   \"destination_url\": \"strava://athletes/12345678987654321\",\n   \"display_name\": \"Marianne V.\",\n   \"avatar_url\": \"https://dgalywyr863hv.cloudfront.net/pictures/athletes/12345678987654321/12345678987654321/3/medium.jpg\",\n   \"show_name\": true\n  }\n ],\n \"device_name\": \"Garmin Edge 1030\",\n \"embed_token\": \"18e4615989b47dd4ff3dc711b0aa4502e4b311a9\",\n \"segment_leaderboard_opt_out\": false,\n \"leaderboard_opt_out\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Activity",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"schema type not provided\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Updates the given activity that is owned by the authenticated athlete. Requires activity:write. Also requires activity:read_all in order to update Only Me activities"
+							},
+							"response": [
+								{
+									"name": "The activity's detailed representation.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\"schema type not provided\""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": 12345678987654320,\n \"resource_state\": 3,\n \"external_id\": \"garmin_push_12345678987654321\",\n \"upload_id\": 98765432123456780,\n \"athlete\": {\n  \"id\": 134815,\n  \"resource_state\": 1\n },\n \"name\": \"Happy Friday\",\n \"distance\": 28099,\n \"moving_time\": 4207,\n \"elapsed_time\": 4410,\n \"total_elevation_gain\": 516,\n \"type\": \"Ride\",\n \"start_date\": \"2018-02-16T14:52:54Z\",\n \"start_date_local\": \"2018-02-16T06:52:54Z\",\n \"timezone\": \"(GMT-08:00) America/Los_Angeles\",\n \"utc_offset\": -28800,\n \"start_latlng\": [\n  37.83,\n  -122.26\n ],\n \"end_latlng\": [\n  37.83,\n  -122.26\n ],\n \"location_city\": null,\n \"location_state\": null,\n \"location_country\": \"United States\",\n \"achievement_count\": 0,\n \"kudos_count\": 19,\n \"comment_count\": 0,\n \"athlete_count\": 1,\n \"photo_count\": 0,\n \"map\": {\n  \"id\": \"a1410355832\",\n  \"polyline\": \"ki{eFvqfiVqAWQIGEEKAYJgBVqDJ{BHa@jAkNJw@Pw@V{APs@^aABQAOEQGKoJ_FuJkFqAo@{A}@sH{DiAs@Q]?WVy@`@oBt@_CB]KYMMkB{AQEI@WT{BlE{@zAQPI@ICsCqA_BcAeCmAaFmCqIoEcLeG}KcG}A}@cDaBiDsByAkAuBqBi@y@_@o@o@kB}BgIoA_EUkAMcACa@BeBBq@LaAJe@b@uA`@_AdBcD`@iAPq@RgALqAB{@EqAyAoOCy@AmCBmANqBLqAZkB\\\\iCPiBJwCCsASiCq@iD]eA]y@[i@w@mAa@i@k@g@kAw@i@Ya@Q]EWFMLa@~BYpAFNpA`Aj@n@X`@V`AHh@JfB@xAMvAGZGHIDIAWOEQNcC@sACYK[MSOMe@QKKKYOs@UYQISCQ?Q@WNo@r@OHGAGCKOQ_BU}@MQGG]Io@@c@FYNg@d@s@d@ODQAMOMaASs@_@a@SESAQDqBn@a@RO?KK?UBU\\\\kA@Y?WMo@Iy@GWQ_@WSSGg@AkABQB_Ap@_A^o@b@Q@o@IS@OHi@n@OFS?OI}@iAQMQGQC}@DOIIUK{@IUOMyBo@kASOKIQCa@L[|AgATWN[He@?QKw@FOPCh@Fx@l@TDLELKl@aAHIJEX@r@ZTDV@LENQVg@RkA@c@MeA?WFOPMf@Ej@Fj@@LGHKDM?_@_@iC?a@HKRIl@NT?FCHMFW?YEYGWQa@GYBiAIq@Gq@L_BHSHK|@WJETSLQZs@z@_A~@uA^U`@G\\\\CRB\\\\Tl@p@Th@JZ^bB`@lAHLXVLDP?LGFSKiDBo@d@wBVi@R]VYVE\\\\@`@Lh@Fh@CzAk@RSDQA]GYe@eAGWSiBAWBWBIJORK`@KPOPSTg@h@}Ad@o@F[E_@EGMKUGmAEYGMIMYKs@?a@J}@@_BD_@HQJMx@e@LKHKHWAo@UoAAWFmAH}@?w@C[YwAAc@HSNM|Ao@rA}@zAq@`@a@j@eAxAuBXQj@MXSR[b@gAFg@?YISOGaAHi@Xw@v@_@d@WRSFqARUHQJc@d@m@`A[VSFUBcAEU@WFULUPa@v@Y~@UrBc@dBI~@?l@P~ABt@N`HEjA]zAEp@@p@TrBCl@CTQb@k@dAg@jAU^KJYLK@k@A[Js@d@a@b@]RgBl@[FMAw@[]G]?m@D_@F]P[Vu@t@[TMF_@Do@E_@@q@P]PWZUZw@vAkAlAGJOj@IlAMd@OR{@p@a@d@sBpD]v@a@`Aa@n@]TODgBVk@Pe@^cBfBc@Rs@La@RSPm@|@wCpDS^Wp@QZML{@l@qBbCYd@k@lAIVCZBZNTr@`@RRHZANIZQPKDW@e@CaASU?I@YTKRQx@@\\\\VmALYRQLCL?v@P|@D\\\\GJEFKDM@OCa@COOYIGm@YMUCM@]JYr@uAx@kAt@}@jAeAPWbAkBj@s@bAiAz@oAj@m@VQlAc@VQ~@aA`Au@p@Q`AIv@MZORUV_@p@iB|AoCh@q@dAaANUNWH[N{AJ[^m@t@_Av@wA\\\\a@`@W`@In@Al@B^E`@Wl@u@\\\\[VQ\\\\K`@Eb@?R@dAZP@d@CRExAs@\\\\Yt@{@LG\\\\MjAATINOXo@d@kAl@_AHYBOCe@QiBCm@Fq@\\\\wADo@AyGEeBWuB@YHu@Tu@Lk@VcCTo@d@aA\\\\WJE`@G~@FP?VI\\\\U~@sANO`@SfAMj@U\\\\WjAsAXS`@UNENALBHFFL?^Ml@Uj@]b@q@RUJSPkChEc@XcAb@sA|@]PaA\\\\OJKNER?TDTNj@Jn@?p@OfC@ZR`B@VCV_@n@{@l@WbACv@OlABnAPl@LNNHbBBNBLFFJ@^GLg@x@i@|AMP[X}@XOJKPET?l@LhAFXp@fBDRCd@S\\\\_@Ps@PQ@}A]S?QDe@V]b@MR[fAKt@ErAF~CANILYDKGIKe@{@Yy@e@sB[gA[c@e@YUCU?WBUHUNQPq@`AiArAMV[^e@Zc@JQJKNMz@?r@Bb@PfAAfA@VVbADn@E`@KHSEe@SMAKDKFM\\\\^dDCh@m@LoAQ_@@MFOZLfBEl@QbASd@KLQBOAaAc@QAQ@QHc@v@ONMJOBOCg@c@]O[EMBKFGL?RHv@ARERGNe@h@{@h@WVGNDt@JLNFPFz@LdBf@f@PJNHPF`ADPJJJDl@I`@B^Tp@bALJNDNALIf@i@PGPCt@DNE`@Uv@[dAw@RITGRCtAARBPJLPJRZxB?VEX_@vAAR?RDNHJJBh@UnBm@h@IRDRJNNJPNbBFRJLLBLCzAmAd@Uf@Gf@?P@PFJNHPFTH`BDTHNJJJ@LG`@m@^YPER@RDPHNNJRLn@HRLN^VNPHTFX@\\\\UlDFb@FHh@NP@HKPsB?}ASkCQ{@[y@q@}@cA{@KOCQDa@t@{CFGJCf@Nl@ZtA~@r@p@`@h@rAxBd@rA\\\\fARdAPjANrB?f@AtBCd@QfBkAjJOlBChA?rBFrBNlBdAfKFzAC~@Iz@Mz@Sv@s@jBmAxBi@hAWt@Sv@Qx@O`BA`@?dAPfBVpAd@`BfBlFf@fBdA~Cr@pAz@fApBhBjAt@H?IL?FBFJLx@^lHvDvh@~XnElCbAd@pGhDbAb@nAr@`Ad@`GhDnBbAxCbBrWhNJJDPARGP_@t@Qh@]pAUtAoA`Ny@jJApBBNFLJFJBv@Hb@HBF?\\\\\",\n  \"resource_state\": 3,\n  \"summary_polyline\": \"ki{eFvqfiVsBmA`Feh@qg@iX`B}JeCcCqGjIq~@kf@cM{KeHeX`@_GdGkSeBiXtB}YuEkPwFyDeAzAe@pC~DfGc@bIOsGmCcEiD~@oBuEkFhBcBmDiEfAVuDiAuD}NnDaNiIlCyDD_CtJKv@wGhD]YyEzBo@g@uKxGmHpCGtEtI~AuLrHkAcAaIvEgH_EaDR_FpBuBg@sNxHqEtHgLoTpIiCzKNr[sB|Es\\\\`JyObYeMbGsMnPsAfDxAnD}DBu@bCx@{BbEEyAoD`AmChNoQzMoGhOwX|[yIzBeFKg[zAkIdU_LiHxK}HzEh@vM_BtBg@xGzDbCcF~GhArHaIfByAhLsDiJuC?_HbHd@nL_Cz@ZnEkDDy@hHwJLiCbIrNrIvN_EfAjDWlEnEiAfBxDlFkBfBtEfDaAzBvDKdFx@|@XgJmDsHhAgD`GfElEzOwBnYdBxXgGlSc@bGdHpW|HdJztBnhAgFxc@HnCvBdA\"\n },\n \"trainer\": false,\n \"commute\": false,\n \"manual\": false,\n \"private\": false,\n \"flagged\": false,\n \"gear_id\": \"b12345678987654321\",\n \"from_accepted_tag\": false,\n \"average_speed\": 6.679,\n \"max_speed\": 18.5,\n \"average_cadence\": 78.5,\n \"average_temp\": 4,\n \"average_watts\": 185.5,\n \"weighted_average_watts\": 230,\n \"kilojoules\": 780.5,\n \"device_watts\": true,\n \"has_heartrate\": false,\n \"max_watts\": 743,\n \"elev_high\": 446.6,\n \"elev_low\": 17.2,\n \"pr_count\": 0,\n \"total_photo_count\": 2,\n \"has_kudoed\": false,\n \"workout_type\": 10,\n \"suffer_score\": null,\n \"description\": \"\",\n \"calories\": 870.2,\n \"segment_efforts\": [\n  {\n   \"id\": 12345678987654320,\n   \"resource_state\": 2,\n   \"name\": \"Tunnel Rd.\",\n   \"activity\": {\n    \"id\": 12345678987654320,\n    \"resource_state\": 1\n   },\n   \"athlete\": {\n    \"id\": 12345678987654320,\n    \"resource_state\": 1\n   },\n   \"elapsed_time\": 2038,\n   \"moving_time\": 2038,\n   \"start_date\": \"2018-02-16T14:56:25Z\",\n   \"start_date_local\": \"2018-02-16T06:56:25Z\",\n   \"distance\": 9434.8,\n   \"start_index\": 211,\n   \"end_index\": 2246,\n   \"average_cadence\": 78.6,\n   \"device_watts\": true,\n   \"average_watts\": 237.6,\n   \"segment\": {\n    \"id\": 673683,\n    \"resource_state\": 2,\n    \"name\": \"Tunnel Rd.\",\n    \"activity_type\": \"Ride\",\n    \"distance\": 9220.7,\n    \"average_grade\": 4.2,\n    \"maximum_grade\": 25.8,\n    \"elevation_high\": 426.5,\n    \"elevation_low\": 43.4,\n    \"start_latlng\": [\n     37.8346153,\n     -122.2520872\n    ],\n    \"end_latlng\": [\n     37.8476261,\n     -122.2008944\n    ],\n    \"climb_category\": 3,\n    \"city\": \"Oakland\",\n    \"state\": \"CA\",\n    \"country\": \"United States\",\n    \"private\": false,\n    \"hazardous\": false,\n    \"starred\": false\n   },\n   \"kom_rank\": null,\n   \"pr_rank\": null,\n   \"achievements\": [],\n   \"hidden\": false\n  }\n ],\n \"splits_metric\": [\n  {\n   \"distance\": 1001.5,\n   \"elapsed_time\": 141,\n   \"elevation_difference\": 4.4,\n   \"moving_time\": 141,\n   \"split\": 1,\n   \"average_speed\": 7.1,\n   \"pace_zone\": 0\n  }\n ],\n \"laps\": [\n  {\n   \"id\": 4479306946,\n   \"resource_state\": 2,\n   \"name\": \"Lap 1\",\n   \"activity\": {\n    \"id\": 1410355832,\n    \"resource_state\": 1\n   },\n   \"athlete\": {\n    \"id\": 134815,\n    \"resource_state\": 1\n   },\n   \"elapsed_time\": 1573,\n   \"moving_time\": 1569,\n   \"start_date\": \"2018-02-16T14:52:54Z\",\n   \"start_date_local\": \"2018-02-16T06:52:54Z\",\n   \"distance\": 8046.72,\n   \"start_index\": 0,\n   \"end_index\": 1570,\n   \"total_elevation_gain\": 276,\n   \"average_speed\": 5.12,\n   \"max_speed\": 9.5,\n   \"average_cadence\": 78.6,\n   \"device_watts\": true,\n   \"average_watts\": 233.1,\n   \"lap_index\": 1,\n   \"split\": 1\n  }\n ],\n \"gear\": {\n  \"id\": \"b12345678987654321\",\n  \"primary\": true,\n  \"name\": \"Tarmac\",\n  \"resource_state\": 2,\n  \"distance\": 32547610\n },\n \"partner_brand_tag\": null,\n \"photos\": {\n  \"primary\": {\n   \"id\": null,\n   \"unique_id\": \"3FDGKL3-204E-4867-9E8D-89FC79EAAE17\",\n   \"urls\": {\n    \"100\": \"https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-128x96.jpg\",\n    \"600\": \"https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-768x576.jpg\"\n   },\n   \"source\": 1\n  },\n  \"use_primary_photo\": true,\n  \"count\": 2\n },\n \"highlighted_kudosers\": [\n  {\n   \"destination_url\": \"strava://athletes/12345678987654321\",\n   \"display_name\": \"Marianne V.\",\n   \"avatar_url\": \"https://dgalywyr863hv.cloudfront.net/pictures/athletes/12345678987654321/12345678987654321/3/medium.jpg\",\n   \"show_name\": true\n  }\n ],\n \"device_name\": \"Garmin Edge 1030\",\n \"embed_token\": \"18e4615989b47dd4ff3dc711b0aa4502e4b311a9\",\n \"segment_leaderboard_opt_out\": false,\n \"leaderboard_opt_out\": false\n}"
+								},
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\"schema type not provided\""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								}
+							]
+						},
+						{
+							"name": "List Activity Laps",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id/laps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id",
+										"laps"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Returns the laps of an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/laps",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"laps"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "Activity Laps.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/laps",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"laps"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": 12345678987654320,\n  \"resource_state\": 2,\n  \"name\": \"Lap 1\",\n  \"activity\": {\n   \"id\": 12345678987654320,\n   \"resource_state\": 1\n  },\n  \"athlete\": {\n   \"id\": 12345678987654320,\n   \"resource_state\": 1\n  },\n  \"elapsed_time\": 1691,\n  \"moving_time\": 1587,\n  \"start_date\": \"2018-02-08T14:13:37Z\",\n  \"start_date_local\": \"2018-02-08T06:13:37Z\",\n  \"distance\": 8046.72,\n  \"start_index\": 0,\n  \"end_index\": 1590,\n  \"total_elevation_gain\": 270,\n  \"average_speed\": 4.76,\n  \"max_speed\": 9.4,\n  \"average_cadence\": 79,\n  \"device_watts\": true,\n  \"average_watts\": 228.2,\n  \"lap_index\": 1,\n  \"split\": 1\n }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get Activity Zones",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id/zones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id",
+										"zones"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<integer>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Summit Feature. Returns the zones of a given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/zones",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"zones"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								},
+								{
+									"name": "Activity Zones.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/zones",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"zones"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"value\": \"reference https://developers.strava.com/swagger/zones.json#/ActivityZone not found in the OpenAPI spec\"\n },\n {\n  \"value\": \"reference https://developers.strava.com/swagger/zones.json#/ActivityZone not found in the OpenAPI spec\"\n }\n]"
+								}
+							]
+						},
+						{
+							"name": "List Activity Comments",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id/comments?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number."
+										},
+										{
+											"key": "per_page",
+											"value": "30",
+											"description": "Number of items per page. Defaults to 30."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Returns the comments on the given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "Comments.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/comments?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"comments"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": 12345678987654320,\n  \"activity_id\": 12345678987654320,\n  \"post_id\": null,\n  \"resource_state\": 2,\n  \"text\": \"Good job and keep the cat pictures coming!\",\n  \"mentions_metadata\": null,\n  \"created_at\": \"2018-02-08T19:25:39Z\",\n  \"athlete\": {\n   \"firstname\": \"Peter\",\n   \"lastname\": \"S\"\n  }\n }\n]"
+								},
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/comments?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"comments"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								}
+							]
+						},
+						{
+							"name": "List Activity Kudoers",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id/kudos?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id",
+										"kudos"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number."
+										},
+										{
+											"key": "per_page",
+											"value": "30",
+											"description": "Number of items per page. Defaults to 30."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Returns the athletes who kudoed an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "Comments.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/kudos?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"kudos"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"firstname\": \"Peter\",\n  \"lastname\": \"S\"\n }\n]"
+								},
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/kudos?page=<integer>&per_page=30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"kudos"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "<integer>"
+												},
+												{
+													"key": "per_page",
+													"value": "30"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								}
+							]
+						},
+						{
+							"name": "Get Activity Streams",
+							"request": {
+								"auth": {
+									"type": "oauth2"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/activities/:id/streams?keys=<string>,<string>&key_by_type=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities",
+										":id",
+										"streams"
+									],
+									"query": [
+										{
+											"key": "keys",
+											"value": "<string>,<string>",
+											"description": "(Required) Desired stream types."
+										},
+										{
+											"key": "key_by_type",
+											"value": "true",
+											"description": "(Required) Must be true."
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) The identifier of the activity."
+										}
+									]
+								},
+								"description": "Returns the given activity's streams. Requires activity:read scope. Requires activity:read_all scope for Only Me activities."
+							},
+							"response": [
+								{
+									"name": "The set of requested streams.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/streams?keys=<string>,<string>&key_by_type=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"streams"
+											],
+											"query": [
+												{
+													"key": "keys",
+													"value": "<string>,<string>"
+												},
+												{
+													"key": "key_by_type",
+													"value": "true"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"type\": \"distance\",\n  \"data\": [\n   2.9,\n   5.8,\n   8.5,\n   11.7,\n   15,\n   19,\n   23.2,\n   28,\n   32.8,\n   38.1,\n   43.8,\n   49.5\n  ],\n  \"series_type\": \"distance\",\n  \"original_size\": 12,\n  \"resolution\": \"high\"\n }\n]"
+								},
+								{
+									"name": "Unexpected error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/activities/:id/streams?keys=<string>,<string>&key_by_type=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"activities",
+												":id",
+												"streams"
+											],
+											"query": [
+												{
+													"key": "keys",
+													"value": "<string>,<string>"
+												},
+												{
+													"key": "key_by_type",
+													"value": "true"
+												}
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"schema type not provided\""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Create an Activity",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "POST",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
+							"mode": "urlencoded",
+							"urlencoded": [
 								{
 									"key": "name",
-									"value": "{{name}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "The name of the activity."
 								},
 								{
 									"key": "type",
-									"value": "{{type}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "Type of activity. For example - Run, Ride etc."
 								},
 								{
 									"key": "start_date_local",
-									"value": "{{start_date_local}}",
-									"type": "text"
+									"value": "<dateTime>",
+									"description": "ISO 8601 formatted date time."
 								},
 								{
 									"key": "elapsed_time",
-									"value": "{{elapsed_time}}",
-									"type": "text"
+									"value": "<integer>",
+									"description": "In seconds."
 								},
 								{
 									"key": "description",
-									"value": "{{description}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "Description of the activity."
 								},
 								{
 									"key": "distance",
-									"value": "{{distance}}",
-									"type": "text"
+									"value": "<float>",
+									"description": "In meters."
 								},
 								{
 									"key": "trainer",
-									"value": "{{trainer}}",
-									"type": "text"
-								},
-								{
-									"key": "photo_ids",
-									"value": "{{photo_ids}}",
-									"type": "text"
+									"value": "<integer>",
+									"description": "Set to 1 to mark as a trainer activity."
 								},
 								{
 									"key": "commute",
-									"value": "{{commute}}",
-									"type": "text"
+									"value": "<integer>",
+									"description": "Set to 1 to mark as commute."
 								}
 							]
 						},
 						"url": {
-							"raw": "https://www.strava.com/api/v3/activities",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/activities",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"activities"
 							]
 						},
 						"description": "Creates a manual activity for an athlete, requires activity:write scope."
 					},
-					"response": []
-				},
-				{
-					"name": "Get Activity",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id?include_all_efforts={{include_all_efforts}}",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id"
-							],
-							"query": [
-								{
-									"key": "include_all_efforts",
-									"value": "{{include_all_efforts}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns the given activity that is owned by the authenticated athlete. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Updates the given activity that is owned by the authenticated athlete. Requires activity:write. Also requires activity:read_all in order to update Only Me activities"
-					},
-					"response": []
-				},
-				{
-					"name": "List Activity Laps",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/laps",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"laps"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns the laps of an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Activity Zones",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/zones",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"zones"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Summit Feature. Returns the zones of a given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
-					},
-					"response": []
-				},
-				{
-					"name": "List Activity Comments",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/comments?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"comments"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": {
+												"content": "The name of the activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "type",
+											"value": "<string>",
+											"description": {
+												"content": "Type of activity. For example - Run, Ride etc.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "start_date_local",
+											"value": "<dateTime>",
+											"description": {
+												"content": "ISO 8601 formatted date time.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "elapsed_time",
+											"value": "<integer>",
+											"description": {
+												"content": "In seconds.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "description",
+											"value": "<string>",
+											"description": {
+												"content": "Description of the activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "distance",
+											"value": "<float>",
+											"description": {
+												"content": "In meters.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "trainer",
+											"value": "<integer>",
+											"description": {
+												"content": "Set to 1 to mark as a trainer activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "commute",
+											"value": "<integer>",
+											"description": {
+												"content": "Set to 1 to mark as commute.",
+												"type": "text/plain"
+											}
+										}
+									]
 								},
+								"url": {
+									"raw": "{{baseUrl}}/activities",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "per_page",
-									"value": "30"
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
+							"cookie": [],
+							"body": "\"schema type not provided\""
 						},
-						"description": "Returns the comments on the given activity. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
-					},
-					"response": []
-				},
-				{
-					"name": "List Activity Kudoers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/kudos?page={{page}}&per_page=30",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"kudos"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "{{page}}"
+						{
+							"name": "The activity's detailed representation.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": {
+												"content": "The name of the activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "type",
+											"value": "<string>",
+											"description": {
+												"content": "Type of activity. For example - Run, Ride etc.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "start_date_local",
+											"value": "<dateTime>",
+											"description": {
+												"content": "ISO 8601 formatted date time.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "elapsed_time",
+											"value": "<integer>",
+											"description": {
+												"content": "In seconds.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "description",
+											"value": "<string>",
+											"description": {
+												"content": "Description of the activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "distance",
+											"value": "<float>",
+											"description": {
+												"content": "In meters.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "trainer",
+											"value": "<integer>",
+											"description": {
+												"content": "Set to 1 to mark as a trainer activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "commute",
+											"value": "<integer>",
+											"description": {
+												"content": "Set to 1 to mark as commute.",
+												"type": "text/plain"
+											}
+										}
+									]
 								},
+								"url": {
+									"raw": "{{baseUrl}}/activities",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "per_page",
-									"value": "30"
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns the athletes who kudoed an activity identified by an identifier. Requires activity:read for Everyone and Followers activities. Requires activity:read_all for Only Me activities."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Activity Streams",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/activities/:id/streams?keys={{keys}}&key_by_type=true",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"activities",
-								":id",
-								"streams"
-							],
-							"query": [
-								{
-									"key": "keys",
-									"value": "{{keys}}"
-								},
-								{
-									"key": "key_by_type",
-									"value": "true"
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						},
-						"description": "Returns the given activity's streams. Requires activity:read scope. Requires activity:read_all scope for Only Me activities."
-					},
-					"response": []
+							"cookie": [],
+							"body": "{\n \"id\": 123456778928065,\n \"resource_state\": 3,\n \"external_id\": null,\n \"upload_id\": null,\n \"athlete\": {\n  \"id\": 12343545645788,\n  \"resource_state\": 1\n },\n \"name\": \"Chill Day\",\n \"distance\": 0,\n \"moving_time\": 18373,\n \"elapsed_time\": 18373,\n \"total_elevation_gain\": 0,\n \"type\": \"Ride\",\n \"start_date\": \"2018-02-20T18:02:13Z\",\n \"start_date_local\": \"2018-02-20T10:02:13Z\",\n \"timezone\": \"(GMT-08:00) America/Los_Angeles\",\n \"utc_offset\": -28800,\n \"achievement_count\": 0,\n \"kudos_count\": 0,\n \"comment_count\": 0,\n \"athlete_count\": 1,\n \"photo_count\": 0,\n \"map\": {\n  \"id\": \"a12345678908766\",\n  \"polyline\": null,\n  \"resource_state\": 3\n },\n \"trainer\": false,\n \"commute\": false,\n \"manual\": true,\n \"private\": false,\n \"flagged\": false,\n \"gear_id\": \"b453542543\",\n \"from_accepted_tag\": null,\n \"average_speed\": 0,\n \"max_speed\": 0,\n \"device_watts\": false,\n \"has_heartrate\": false,\n \"pr_count\": 0,\n \"total_photo_count\": 0,\n \"has_kudoed\": false,\n \"workout_type\": null,\n \"description\": null,\n \"calories\": 0,\n \"segment_efforts\": []\n}"
+						}
+					]
 				}
 			],
-			"description": "Folder for activities"
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "clubs",
+			"name": "clubs/{id}",
 			"item": [
 				{
 					"name": "Get Club",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/clubs/:id",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"clubs",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the club."
 								}
 							]
 						},
 						"description": "Returns a given club using its identifier."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "The detailed representation of a club.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": 1,\n \"resource_state\": 3,\n \"name\": \"Team Strava Cycling\",\n \"profile_medium\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/1582/4/medium.jpg\",\n \"profile\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/1582/4/large.jpg\",\n \"cover_photo\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/4328276/1/large.jpg\",\n \"cover_photo_small\": \"https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/4328276/1/small.jpg\",\n \"sport_type\": \"cycling\",\n \"city\": \"San Francisco\",\n \"state\": \"California\",\n \"country\": \"United States\",\n \"private\": true,\n \"member_count\": 116,\n \"featured\": false,\n \"verified\": false,\n \"url\": \"team-strava-bike\",\n \"membership\": \"member\",\n \"admin\": false,\n \"owner\": false,\n \"description\": \"Private club for Cyclists who work at Strava.\",\n \"club_type\": \"company\",\n \"post_count\": 29,\n \"owner_id\": 759,\n \"following_count\": 107\n}"
+						}
+					]
 				},
 				{
 					"name": "List Club Members",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/members?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/clubs/:id/members?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"clubs",
 								":id",
 								"members"
@@ -1232,45 +3360,130 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the club."
 								}
 							]
 						},
 						"description": "Returns a list of the athletes who are members of a given club."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/members?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"members"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A list of summary athlete representations.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/members?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"members"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"resource_state\": 2,\n  \"firstname\": \"Peter\",\n  \"lastname\": \"S.\",\n  \"membership\": \"member\",\n  \"admin\": false,\n  \"owner\": false\n }\n]"
+						}
+					]
 				},
 				{
-					"name": "List Club Administrators.",
+					"name": "List Club Administrators",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/admins?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/clubs/:id/admins?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"clubs",
 								":id",
 								"admins"
@@ -1278,45 +3491,130 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the club."
 								}
 							]
 						},
 						"description": "Returns a list of the administrators of a given club."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/admins?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"admins"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A list of summary athlete representations.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/admins?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"admins"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"resource_state\": 2,\n  \"firstname\": \"Peter\",\n  \"lastname\": \"S.\"\n }\n]"
+						}
+					]
 				},
 				{
 					"name": "List Club Activities",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/clubs/:id/activities?page={{page}}&per_page=30",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/clubs/:id/activities?page=<integer>&per_page=30",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"clubs",
 								":id",
 								"activities"
@@ -1324,127 +3622,232 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "{{page}}"
+									"value": "<integer>",
+									"description": "Page number."
 								},
 								{
 									"key": "per_page",
-									"value": "30"
+									"value": "30",
+									"description": "Number of items per page. Defaults to 30."
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the club."
 								}
 							]
 						},
 						"description": "Retrieve recent activities from members of a specific club. The authenticated athlete must belong to the requested club in order to hit this endpoint. Pagination is supported. Athlete profile visibility is respected for all activities."
 					},
-					"response": []
-				}
-			],
-			"description": "Folder for clubs"
-		},
-		{
-			"name": "gear",
-			"item": [
-				{
-					"name": "Get Equipment",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://www.strava.com/api/v3/gear/:id",
-							"protocol": "https",
-							"host": [
-								"www",
-								"strava",
-								"com"
-							],
-							"path": [
-								"api",
-								"v3",
-								"gear",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{id}}"
+					"response": [
+						{
+							"name": "A list of activities.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/activities?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"activities"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
 								}
-							]
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"resource_state\": 2,\n  \"athlete\": {\n   \"resource_state\": 2,\n   \"firstname\": \"Peter\",\n   \"lastname\": \"S.\"\n  },\n  \"name\": \"World Championship\",\n  \"distance\": 2641.7,\n  \"moving_time\": 577,\n  \"elapsed_time\": 635,\n  \"total_elevation_gain\": 8.8,\n  \"type\": \"Ride\",\n  \"workout_type\": null\n }\n]"
 						},
-						"description": "Returns an equipment using its identifier."
-					},
-					"response": []
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/clubs/:id/activities?page=<integer>&per_page=30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"clubs",
+										":id",
+										"activities"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "<integer>"
+										},
+										{
+											"key": "per_page",
+											"value": "30"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				}
 			],
-			"description": "Folder for gear"
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "routes",
+			"name": "routes/{id}",
 			"item": [
 				{
 					"name": "Get Route",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/routes/:id",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/routes/:id",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"routes",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the route."
 								}
 							]
 						},
 						"description": "Returns a route using its identifier. Requires read_all scope for private routes."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A representation of the route.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Export Route GPX",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/routes/:id/export_gpx",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/routes/:id/export_gpx",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"routes",
 								":id",
 								"export_gpx"
@@ -1452,35 +3855,98 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the route."
 								}
 							]
 						},
 						"description": "Returns a GPX file of the route. Requires read_all scope for private routes."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "A GPX file with the route.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/export_gpx",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"export_gpx"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/gpx+xml"
+								}
+							],
+							"cookie": [],
+							"body": "<element>(string)</element>"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/export_gpx",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"export_gpx"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Export Route TCX",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/routes/:id/export_tcx",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/routes/:id/export_tcx",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"routes",
 								":id",
 								"export_tcx"
@@ -1488,35 +3954,98 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<integer>",
+									"description": "(Required) The identifier of the route."
 								}
 							]
 						},
 						"description": "Returns a TCX file of the route. Requires read_all scope for private routes."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/export_tcx",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"export_tcx"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A TCX file with the route.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/export_tcx",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"export_tcx"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/tcx+xml"
+								}
+							],
+							"cookie": [],
+							"body": "<element>(string)</element>"
+						}
+					]
 				},
 				{
 					"name": "Get Route Streams",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/routes/:id/streams",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/routes/:id/streams",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"routes",
 								":id",
 								"streams"
@@ -1524,16 +4053,86 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{id}}"
+									"value": "<long>",
+									"description": "(Required) The identifier of the route."
 								}
 							]
 						},
 						"description": "Returns the given route's streams. Requires read_all scope for private routes."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "The set of requested streams.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/streams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"streams"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"type\": \"latlng\",\n  \"data\": [\n   [\n    37.833112,\n    -122.483436\n   ],\n   [\n    37.832964,\n    -122.483406\n   ]\n  ]\n },\n {\n  \"type\": \"distance\",\n  \"data\": [\n   0,\n   16.8\n  ]\n },\n {\n  \"type\": \"altitude\",\n  \"data\": [\n   92.4,\n   93.4\n  ]\n }\n]"
+						},
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/routes/:id/streams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"routes",
+										":id",
+										"streams"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				}
 			],
-			"description": "Folder for routes"
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "uploads",
@@ -1541,12 +4140,11 @@
 				{
 					"name": "Upload Activity",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "POST",
 						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
 							{
 								"key": "Content-Type",
 								"value": "multipart/form-data"
@@ -1557,96 +4155,434 @@
 							"formdata": [
 								{
 									"key": "file",
-									"value": "{{file}}",
-									"type": "text"
+									"value": "<binary>",
+									"description": "The uploaded file."
 								},
 								{
 									"key": "name",
-									"value": "{{name}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "The desired name of the resulting activity."
 								},
 								{
 									"key": "description",
-									"value": "{{description}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "The desired description of the resulting activity."
 								},
 								{
 									"key": "trainer",
-									"value": "{{trainer}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "Whether the resulting activity should be marked as having been performed on a trainer."
 								},
 								{
 									"key": "commute",
-									"value": "{{commute}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "Whether the resulting activity should be tagged as a commute."
 								},
 								{
 									"key": "data_type",
-									"value": "{{data_type}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "The format of the uploaded file. (This can only be one of fit,fit.gz,tcx,tcx.gz,gpx,gpx.gz)"
 								},
 								{
 									"key": "external_id",
-									"value": "{{external_id}}",
-									"type": "text"
+									"value": "<string>",
+									"description": "The desired external identifier of the resulting activity."
 								}
 							]
 						},
 						"url": {
-							"raw": "https://www.strava.com/api/v3/uploads",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/uploads",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"uploads"
 							]
 						},
 						"description": "Uploads a new data file to create an activity from. Requires activity:write scope."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"value": "<binary>",
+											"description": {
+												"content": "The uploaded file.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": {
+												"content": "The desired name of the resulting activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "description",
+											"value": "<string>",
+											"description": {
+												"content": "The desired description of the resulting activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "trainer",
+											"value": "<string>",
+											"description": {
+												"content": "Whether the resulting activity should be marked as having been performed on a trainer.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "commute",
+											"value": "<string>",
+											"description": {
+												"content": "Whether the resulting activity should be tagged as a commute.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "data_type",
+											"value": "<string>",
+											"description": {
+												"content": "The format of the uploaded file. (This can only be one of fit,fit.gz,tcx,tcx.gz,gpx,gpx.gz)",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "external_id",
+											"value": "<string>",
+											"description": {
+												"content": "The desired external identifier of the resulting activity.",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/uploads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"uploads"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "A representation of the created upload.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"value": "<binary>",
+											"description": {
+												"content": "The uploaded file.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "name",
+											"value": "<string>",
+											"description": {
+												"content": "The desired name of the resulting activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "description",
+											"value": "<string>",
+											"description": {
+												"content": "The desired description of the resulting activity.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "trainer",
+											"value": "<string>",
+											"description": {
+												"content": "Whether the resulting activity should be marked as having been performed on a trainer.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "commute",
+											"value": "<string>",
+											"description": {
+												"content": "Whether the resulting activity should be tagged as a commute.",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "data_type",
+											"value": "<string>",
+											"description": {
+												"content": "The format of the uploaded file. (This can only be one of fit,fit.gz,tcx,tcx.gz,gpx,gpx.gz)",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "external_id",
+											"value": "<string>",
+											"description": {
+												"content": "The desired external identifier of the resulting activity.",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/uploads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"uploads"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				},
 				{
 					"name": "Get Upload",
 					"request": {
+						"auth": {
+							"type": "oauth2"
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "https://www.strava.com/api/v3/uploads/:uploadId",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/uploads/:uploadId",
 							"host": [
-								"www",
-								"strava",
-								"com"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"api",
-								"v3",
 								"uploads",
 								":uploadId"
 							],
 							"variable": [
 								{
 									"key": "uploadId",
-									"value": "{{uploadId}}"
+									"value": "<long>",
+									"description": "(Required) The identifier of the upload."
 								}
 							]
 						},
 						"description": "Returns an upload for a given identifier. Requires activity:write scope."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Unexpected error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/uploads/:uploadId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"uploads",
+										":uploadId"
+									],
+									"variable": [
+										{
+											"key": "uploadId"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						},
+						{
+							"name": "Representation of the upload.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/uploads/:uploadId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"uploads",
+										":uploadId"
+									],
+									"variable": [
+										{
+											"key": "uploadId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"schema type not provided\""
+						}
+					]
 				}
 			],
-			"description": "Folder for uploads"
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get Equipment",
+			"request": {
+				"auth": {
+					"type": "oauth2"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/gear/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"gear",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "<string>",
+							"description": "(Required) The identifier of the gear."
+						}
+					]
+				},
+				"description": "Returns an equipment using its identifier."
+			},
+			"response": [
+				{
+					"name": "Unexpected error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/gear/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gear",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "\"schema type not provided\""
+				},
+				{
+					"name": "A representation of the gear.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/gear/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gear",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"id\": \"b1231\",\n \"primary\": false,\n \"resource_state\": 3,\n \"distance\": 388206,\n \"brand_name\": \"BMC\",\n \"model_name\": \"Teammachine\",\n \"frame_type\": 3,\n \"description\": \"My Bike.\"\n}"
+				}
+			]
 		}
-	]
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://www.strava.com/api/v3",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
 }
